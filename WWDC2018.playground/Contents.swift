@@ -110,7 +110,7 @@ func createHearts() {
         let heart = SKSpriteNode(imageNamed: "Heart")
         let heartPosition = CGPoint(x: treePosition.x + CGFloat(i), y: treePosition.y + CGFloat(i))
         heart.position = heartPosition
-        heart.setScale(1.0)
+        heart.setScale(0.2)
         hearts.append(heart)
         scene.addChild(heart)
     }
