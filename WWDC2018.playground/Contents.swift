@@ -83,8 +83,8 @@ import SpriteKit
 //let master = WWDCMasterViewController()
 //let navigation = UINavigationController(rootViewController: master)
 //PlaygroundPage.current.liveView = navigation
-//
-//
+
+
 
 
 let frame = CGRect(x: 0, y: 0, width: 500, height: 750)
@@ -103,26 +103,24 @@ func createTree() {
     scene.addChild(tree)
 }
 
-//func createHearts() {
-//    var hearts = [SKSpriteNode]()
-//
-//    for i in 0...6 {
-//        let heart = SKSpriteNode(imageNamed: "Heart")
-//        let heartPosition = CGPoint(x: treePosition.x + CGFloat(i), y: treePosition.y + CGFloat(i))
-//        heart.position = heartPosition
-//        heart.setScale(1.0)
-//        hearts.append(heart)
-//        scene.addChild(heart)
-//    }
-//}
+func createHearts() {
+    var hearts = [SKSpriteNode]()
+
+    for i in 0...6 {
+        let heart = SKSpriteNode(imageNamed: "Heart")
+        let heartPosition = CGPoint(x: treePosition.x + CGFloat(i), y: treePosition.y + CGFloat(i))
+        heart.position = heartPosition
+        heart.setScale(1.0)
+        hearts.append(heart)
+        scene.addChild(heart)
+    }
+}
 
 createTree()
-//createHearts()
+createHearts()
 
 view.presentScene(scene)
 PlaygroundPage.current.liveView = view
-
-
 
 
 
