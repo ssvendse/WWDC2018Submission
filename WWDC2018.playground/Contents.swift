@@ -8,6 +8,10 @@ let midpoint = CGPoint(x: frame.size.width / 2.0, y: frame.size.height / 2.0)
 let view = SKView(frame: frame)
 var scene = SKScene(size: frame.size)
 
+var hearts = [SKSpriteNode]()
+var people = [SKSpriteNode]()
+var wind = SKSpriteNode()
+
 func createLandscape() {
     let landscape = SKSpriteNode(imageNamed: "Landscape")
     
@@ -17,10 +21,10 @@ func createLandscape() {
 }
 
 func createHearts() {
-    var hearts = [SKSpriteNode]()
 
     for i in 0...6 {
-        let heart = SKSpriteNode(imageNamed: "Heart")
+        let heartTexture = SKTexture(imageNamed: "Heart")
+        let heart = SKSpriteNode(texture: heartTexture)
         
         var heartPosition: CGPoint
         switch i {
@@ -50,7 +54,6 @@ func createHearts() {
 }
 
 func createPeople() {
-    var people = [SKSpriteNode]()
     
     for i in 0...5 {
         var person: SKSpriteNode
@@ -59,24 +62,31 @@ func createPeople() {
         switch i {
         case 0:
             person = SKSpriteNode(imageNamed: "Person1")
+            person.name = "Person1"
             personPosition = CGPoint(x: midpoint.x - 210, y: midpoint.y)
         case 1:
             person = SKSpriteNode(imageNamed: "Person2")
+            person.name = "Person2"
             personPosition = CGPoint(x: midpoint.x - 200, y: midpoint.y - 170)
         case 2:
             person = SKSpriteNode(imageNamed: "Person3")
+            person.name = "Person3"
             personPosition = CGPoint(x: midpoint.x - 80, y: midpoint.y - 230)
         case 3:
             person = SKSpriteNode(imageNamed: "Person4")
+            person.name = "Person4"
             personPosition = CGPoint(x: midpoint.x + 60, y: midpoint.y - 230)
         case 4:
             person = SKSpriteNode(imageNamed: "Person5")
+            person.name = "Person5"
             personPosition = CGPoint(x: midpoint.x + 200, y: midpoint.y - 170)
         case 5:
             person = SKSpriteNode(imageNamed: "Person6")
+            person.name = "Person6"
             personPosition = CGPoint(x: midpoint.x + 210, y: midpoint.y)
         default:
             person = SKSpriteNode(imageNamed: "Person1")
+            person.name = "Person1"
             personPosition = CGPoint(x: midpoint.x, y: midpoint.y)
         }
         
@@ -88,27 +98,35 @@ func createPeople() {
 }
 
 func createWind() {
+    //create
     let windTexture = SKTexture(imageNamed: "Wind")
-    let wind = SKSpriteNode(texture: windTexture)
+    wind = SKSpriteNode(texture: windTexture)
     
     wind.setScale(0.6)
     wind.position = CGPoint(x: 0, y: midpoint.y + 150)
     scene.addChild(wind)
-    
-//    UIView.animate(withDuration: 2.0, animations: { () -> Void in
-//        wind.position = CGPoint(x: frame.width + 100, y: midpoint.y + 150)
-//        })
-    
+
+    //actions
     let endPosition = frame.width + 150
-    let moveSequence = SKAction.moveBy(x: endPosition, y: 0, duration: 4.0)
-    wind.run(moveSequence)
+    let moveBy = SKAction.moveBy(x: endPosition, y: 0, duration: 4.0)
+    let wait = SKAction.wait(forDuration: 3)
+    let warp = SKAction.moveTo(x: CGFloat(-100), duration: 0)
+    
+    let sequence = SKAction.sequence([moveBy, wait, warp])
+    let repeatForever = SKAction.repeatForever(sequence)
+    wind.run(repeatForever)
+}
+
+func moveHearts() {
+    for heart in hearts {
+        <#code#>
+    }
 }
 
 createLandscape()
 createHearts()
 createPeople()
 createWind()
-
 
 view.presentScene(scene)
 PlaygroundPage.current.liveView = view
