@@ -2,6 +2,25 @@ import UIKit
 import PlaygroundSupport
 import SpriteKit
 
+/*
+ 
+ Skyler Svendsen's WWDC - 2018 Scholarship Application Playground
+ 
+ Asset attribution:
+    People created with
+    Wheelchair created by
+    Landscape created with
+    Wind created by
+    Hearts created by
+    Apple logo ...
+ 
+ All code written by author, Skyler Svendsen
+ 
+ Thanks for taking the time to look at this, I hope you enjoy it!
+ 
+ */
+
+//variables
 let frame = CGRect(x: 0, y: 0, width: 800, height: 750)
 let midpoint = CGPoint(x: frame.size.width / 2.0, y: frame.size.height / 2.0)
 
@@ -12,6 +31,7 @@ var hearts = [SKSpriteNode]()
 var people = [SKSpriteNode]()
 var wind = SKSpriteNode()
 
+//functions
 func createLandscape() {
     let landscape = SKSpriteNode(imageNamed: "Landscape")
     
@@ -30,18 +50,25 @@ func createHearts() {
         switch i {
         case 0:
             heartPosition = CGPoint(x: midpoint.x - 40, y: midpoint.y + 70)
+            heart.name = "heart1"
         case 1:
             heartPosition = CGPoint(x: midpoint.x, y: midpoint.y + 150)
+            heart.name = "heart2"
         case 2:
             heartPosition = CGPoint(x: midpoint.x + 10, y: midpoint.y + 60)
+            heart.name = "heart3"
         case 3:
             heartPosition = CGPoint(x: midpoint.x - 40, y: midpoint.y + 20)
+            heart.name = "heart4"
         case 4:
             heartPosition = CGPoint(x: midpoint.x + 30, y: midpoint.y + 105)
+            heart.name = "heart5"
         case 5:
             heartPosition = CGPoint(x: midpoint.x - 30, y: midpoint.y + 115)
+            heart.name = "heart6"
         case 6:
             heartPosition = CGPoint(x: midpoint.x + 40, y: midpoint.y + 20)
+            heart.name = "heart1"
         default:
             heartPosition = CGPoint(x: midpoint.x, y: midpoint.y)
         }
@@ -119,10 +146,11 @@ func createWind() {
 
 func moveHearts() {
     for heart in hearts {
-        <#code#>
+        
     }
 }
 
+//create scene and actions
 createLandscape()
 createHearts()
 createPeople()
