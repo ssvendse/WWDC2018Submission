@@ -1,1 +1,1 @@
-# WWDC2018Submission
+This is my submission for the scholarship to attend WWDC - 2018. 
