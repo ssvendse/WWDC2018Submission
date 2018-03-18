@@ -4,7 +4,6 @@ import SpriteKit
 
 let frame = CGRect(x: 0, y: 0, width: 800, height: 750)
 let midpoint = CGPoint(x: frame.size.width / 2.0, y: frame.size.height / 2.0)
-let treePosition = CGPoint(x: midpoint.x, y: midpoint.y + frame.size.height * 0.25)
 
 let view = SKView(frame: frame)
 var scene = SKScene(size: frame.size)
@@ -88,9 +87,28 @@ func createPeople() {
     }
 }
 
+func createWind() {
+    let windTexture = SKTexture(imageNamed: "Wind")
+    let wind = SKSpriteNode(texture: windTexture)
+    
+    wind.setScale(0.6)
+    wind.position = CGPoint(x: 0, y: midpoint.y + 150)
+    scene.addChild(wind)
+    
+//    UIView.animate(withDuration: 2.0, animations: { () -> Void in
+//        wind.position = CGPoint(x: frame.width + 100, y: midpoint.y + 150)
+//        })
+    
+    let endPosition = frame.width + 150
+    let moveSequence = SKAction.moveBy(x: endPosition, y: 0, duration: 4.0)
+    wind.run(moveSequence)
+}
+
 createLandscape()
 createHearts()
 createPeople()
+createWind()
+
 
 view.presentScene(scene)
 PlaygroundPage.current.liveView = view
