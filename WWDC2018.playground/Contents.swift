@@ -113,7 +113,7 @@ func createPeople() {
             personPosition = CGPoint(x: midpoint.x + 210, y: midpoint.y)
         default:
             person = SKSpriteNode(imageNamed: "Person1")
-            person.name = "Person1"
+            person.name = "Person7"
             personPosition = CGPoint(x: midpoint.x, y: midpoint.y)
         }
         
@@ -140,14 +140,61 @@ func createWind() {
     let warp = SKAction.moveTo(x: CGFloat(-100), duration: 0)
     
     let sequence = SKAction.sequence([moveBy, wait, warp])
-    let repeatForever = SKAction.repeatForever(sequence)
-    wind.run(repeatForever)
+    let repeatAction = SKAction.repeat(sequence, count: 3)
+    wind.run(repeatAction)
+}
+
+func wiggleHearts() {
+    for heart in hearts {
+        let startPosition = CGPoint(x: heart.position.x, y: heart.position.y)
+        let endPosition = CGPoint(x: heart.position.x + 3, y: heart.position.y)
+
+        let wiggleTo = SKAction.moveTo(x: endPosition.x, duration: 0.3)
+        let wiggleBack = SKAction.moveTo(x: startPosition.x, duration: 0.3)
+
+        let sequence = SKAction.sequence([wiggleTo, wiggleBack])
+        let repeatAction = SKAction.repeat(sequence, count: 5)
+        heart.run(repeatAction)
+    }
 }
 
 func moveHearts() {
-    for heart in hearts {
-        
+    for heart in hearts{
+        switch heart.name {
+        case "heart1"?:
+            //CGPoint(x: midpoint.x - 210, y: midpoint.y)
+            break
+        case "heart2"?:
+            //CGPoint(x: midpoint.x - 200, y: midpoint.y - 170)
+            break
+        case "heart3"?:
+            //CGPoint(x: midpoint.x - 80, y: midpoint.y - 230)
+            break
+        case "heart4"?:
+            //CGPoint(x: midpoint.x + 60, y: midpoint.y - 230)
+            break
+        case "heart5"?:
+            //CGPoint(x: midpoint.x + 200, y: midpoint.y - 170)
+            break
+        case "heart6"?:
+            //CGPoint(x: midpoint.x + 210, y: midpoint.y)
+            break
+        default:
+            break
+        }
     }
+}
+
+func fadeHearts() {
+    
+}
+
+func illuminateShirts() {
+    
+}
+
+func showLogo() {
+    
 }
 
 //create scene and actions
@@ -155,6 +202,7 @@ createLandscape()
 createHearts()
 createPeople()
 createWind()
+wiggleHearts()
 
 view.presentScene(scene)
 PlaygroundPage.current.liveView = view
