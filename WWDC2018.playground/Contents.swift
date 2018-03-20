@@ -378,7 +378,7 @@ func showLogo() {
     let logoYellowTexture = SKTexture(imageNamed: "Apple-Yellow")
     let logoYellow = SKSpriteNode(texture: logoYellowTexture)
     
-    logoYellow.position = CGPoint(x: midpoint.x - 25, y: midpoint.y + 125)
+    logoYellow.position = CGPoint(x: midpoint.x - 15, y: midpoint.y + 110)
     logoYellow.alpha = 0
     
     scene.addChild(logoYellow)
@@ -387,7 +387,7 @@ func showLogo() {
     let logoOrangeTexture = SKTexture(imageNamed: "Apple-Orange")
     let logoOrange = SKSpriteNode(texture: logoOrangeTexture)
     
-    logoOrange.position = CGPoint(x: midpoint.x - 25, y: midpoint.y + 50)
+    logoOrange.position = CGPoint(x: midpoint.x - 26, y: midpoint.y + 64)
     logoOrange.alpha = 0
     
     scene.addChild(logoOrange)
@@ -396,7 +396,7 @@ func showLogo() {
     let logoRedTexture = SKTexture(imageNamed: "Apple-Red")
     let logoRed = SKSpriteNode(texture: logoRedTexture)
     
-    logoRed.position = CGPoint(x: midpoint.x, y: midpoint.y)
+    logoRed.position = CGPoint(x: midpoint.x - 4, y: midpoint.y + 19)
     logoRed.alpha = 0
     
     scene.addChild(logoRed)
@@ -405,7 +405,7 @@ func showLogo() {
     let logoPurpleTexture = SKTexture(imageNamed: "Apple-Purple")
     let logoPurple = SKSpriteNode(texture: logoPurpleTexture)
     
-    logoPurple.position = CGPoint(x: midpoint.x, y: midpoint.y - 75 )
+    logoPurple.position = CGPoint(x: midpoint.x, y: midpoint.y - 29)
     logoPurple.alpha = 0
     
     scene.addChild(logoPurple)
@@ -414,7 +414,7 @@ func showLogo() {
     let logoBlueTexture = SKTexture(imageNamed: "Apple-Blue")
     let logoBlue = SKSpriteNode(texture: logoBlueTexture)
     
-    logoBlue.position = CGPoint(x: midpoint.x, y: midpoint.y - 150 )
+    logoBlue.position = CGPoint(x: midpoint.x, y: midpoint.y - 78)
     logoBlue.alpha = 0
     
     scene.addChild(logoBlue)
