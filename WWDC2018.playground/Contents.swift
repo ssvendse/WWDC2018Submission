@@ -130,6 +130,57 @@ func createPeople() {
     }
 }
 
+func illuminateShirts() {
+    for i in 0...5 {
+        var person: SKSpriteNode
+        var personPosition: CGPoint
+        
+        switch i {
+        case 0:
+            person = SKSpriteNode(imageNamed: "Person1-glow")
+            person.name = "Person1-glow"
+            personPosition = CGPoint(x: midpoint.x - 210, y: midpoint.y)
+            person.alpha = 0
+        case 1:
+            person = SKSpriteNode(imageNamed: "Person2-glow")
+            person.name = "Person2-glow"
+            personPosition = CGPoint(x: midpoint.x - 200, y: midpoint.y - 170)
+            person.alpha = 0
+        case 2:
+            person = SKSpriteNode(imageNamed: "Person3-glow")
+            person.name = "Person3-glow"
+            personPosition = CGPoint(x: midpoint.x - 80, y: midpoint.y - 230)
+            person.alpha = 0
+        case 3:
+            person = SKSpriteNode(imageNamed: "Person4-glow")
+            person.name = "Person4-glow"
+            personPosition = CGPoint(x: midpoint.x + 60, y: midpoint.y - 230)
+            person.alpha = 0
+        case 4:
+            person = SKSpriteNode(imageNamed: "Person5-glow")
+            person.name = "Person5-glow"
+            personPosition = CGPoint(x: midpoint.x + 200, y: midpoint.y - 170)
+            person.alpha = 0
+        case 5:
+            person = SKSpriteNode(imageNamed: "Person6-glow")
+            person.name = "Person6-glow"
+            personPosition = CGPoint(x: midpoint.x + 210, y: midpoint.y)
+            person.alpha = 0
+        default:
+            person = SKSpriteNode(imageNamed: "Person1")
+            person.name = "Person7-glow"
+            personPosition = CGPoint(x: midpoint.x, y: midpoint.y)
+            person.alpha = 0
+        }
+        
+        person.position = personPosition
+        person.setScale(0.6)
+        peopleGlow.append(person)
+        allChildren.append(person)
+        scene.addChild(person)
+    }
+}
+
 func createWind() {
     //create
     let windTexture = SKTexture(imageNamed: "Wind")
@@ -140,15 +191,6 @@ func createWind() {
     allChildren.append(wind)
     scene.addChild(wind)
 
-    //actions
-    let endPosition = frame.width + 150
-    let moveBy = SKAction.moveBy(x: endPosition, y: 0, duration: 4.0)
-    let wait = SKAction.wait(forDuration: 3)
-    let warp = SKAction.moveTo(x: CGFloat(-100), duration: 0)
-    
-    let sequence = SKAction.sequence([moveBy, wait, warp])
-    let repeatAction = SKAction.repeat(sequence, count: 3)
-    wind.run(repeatAction)
 }
 
 func wiggleHearts() {
@@ -307,65 +349,15 @@ func moveHearts() {
     }
 }
 
-func illuminateShirts() {
-    for i in 0...5 {
-        var person: SKSpriteNode
-        var personPosition: CGPoint
-        
-        switch i {
-        case 0:
-            person = SKSpriteNode(imageNamed: "Person1-glow")
-            person.name = "Person1-glow"
-            personPosition = CGPoint(x: midpoint.x - 210, y: midpoint.y)
-            person.alpha = 0
-        case 1:
-            person = SKSpriteNode(imageNamed: "Person2-glow")
-            person.name = "Person2-glow"
-            personPosition = CGPoint(x: midpoint.x - 200, y: midpoint.y - 170)
-            person.alpha = 0
-        case 2:
-            person = SKSpriteNode(imageNamed: "Person3-glow")
-            person.name = "Person3-glow"
-            personPosition = CGPoint(x: midpoint.x - 80, y: midpoint.y - 230)
-            person.alpha = 0
-        case 3:
-            person = SKSpriteNode(imageNamed: "Person4-glow")
-            person.name = "Person4-glow"
-            personPosition = CGPoint(x: midpoint.x + 60, y: midpoint.y - 230)
-            person.alpha = 0
-        case 4:
-            person = SKSpriteNode(imageNamed: "Person5-glow")
-            person.name = "Person5-glow"
-            personPosition = CGPoint(x: midpoint.x + 200, y: midpoint.y - 170)
-            person.alpha = 0
-        case 5:
-            person = SKSpriteNode(imageNamed: "Person6-glow")
-            person.name = "Person6-glow"
-            personPosition = CGPoint(x: midpoint.x + 210, y: midpoint.y)
-            person.alpha = 0
-        default:
-            person = SKSpriteNode(imageNamed: "Person1")
-            person.name = "Person7-glow"
-            personPosition = CGPoint(x: midpoint.x, y: midpoint.y)
-            person.alpha = 0
-        }
-        
-        person.position = personPosition
-        person.setScale(0.6)
-        peopleGlow.append(person)
-        allChildren.append(person)
-        scene.addChild(person)
-    }
-}
 
-func showLogo() {
-    let fadeOut = SKAction.fadeOut(withDuration: 4)
-    
 
-    for child in allChildren {
-        child.run(fadeOut)
-    }
-    
+func createLogo() {
+//    let fadeOut = SKAction.fadeOut(withDuration: 4)
+//
+//    for child in allChildren {
+//        child.run(fadeOut)
+//    }
+//
     let logoGreenTexture = SKTexture(imageNamed: "Apple-Green")
     let logoGreen = SKSpriteNode(texture: logoGreenTexture)
     
@@ -420,20 +412,44 @@ func showLogo() {
     scene.addChild(logoBlue)
     totalLogo.append(logoBlue)
     
-    for child in totalLogo {
-        child.alpha = 1
-    }
 }
 
+func moveWind() {
+    //actions
+    let endPosition = frame.width + 150
+    let moveBy = SKAction.moveBy(x: endPosition, y: 0, duration: 4.0)
+    let wait = SKAction.wait(forDuration: 3)
+    let warp = SKAction.moveTo(x: CGFloat(-100), duration: 0)
+    
+    let sequence = SKAction.sequence([moveBy, wait, warp])
+    let repeatAction = SKAction.repeat(sequence, count: 3)
+    wind.run(repeatAction)
+}
+
+func create() {
+    createLandscape()
+    createHearts()
+    createPeople()
+    createWind()
+    illuminateShirts()
+    createLogo()
+}
+
+func animate() {
+    let pause = SKAction.wait(forDuration: 3)
+    scene.run(pause)
+    moveWind()
+    scene.run(pause)
+    wiggleHearts()
+    scene.run(pause)
+    moveHearts()
+    
+}
 //create scene and actions
-createLandscape()
-createHearts()
-createPeople()
-illuminateShirts()
-createWind()
-wiggleHearts()
-moveHearts()
-showLogo()
+
+create()
+animate()
+
 
 view.presentScene(scene)
 PlaygroundPage.current.liveView = view
