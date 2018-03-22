@@ -12,7 +12,7 @@ import SpriteKit
     Landscape created with
     Wind created by
     Hearts created by
-    Apple logo ...
+    Apple logo created by Skyler Svendsen in Affinity Designer
  
  All code written by author, Skyler Svendsen
  
@@ -207,19 +207,38 @@ func wiggleHearts() {
     }
 }
 
+func getMoveNodes(for heart: CGPoint) -> [CGPoint]{
+    let xStart = heart.x
+    let yStart = heart.y
+    
+    var returnArray = [CGPoint]()
+    
+    let node1 = CGPoint(x: heart.x + 340, y: heart.y + 130)
+    let node2 = CGPoint(x: node1.x - 100, y: node1.y + 150)
+    let node3 = CGPoint(x: node2.x - 100, y: node2.y - 50)
+    
+    returnArray.append(node1)
+    returnArray.append(node2)
+    returnArray.append(node3)
+    
+    return returnArray
+}
+
 func moveHearts() {
     for heart in hearts{
         switch heart.name {
         case "heart1"?:
             
-            let mid1Pos = CGPoint(x: midpoint.x + 300, y: midpoint.y + 200)
-            let mid2Pos = CGPoint(x: mid1Pos.x - 100, y: mid1Pos.y + 150)
-            let mid3Pos = CGPoint(x: mid2Pos.x - 100, y: mid2Pos.y - 50)
+//            let mid1Pos = CGPoint(x: midpoint.x + 300, y: midpoint.y + 200)
+//            let mid2Pos = CGPoint(x: mid1Pos.x - 100, y: mid1Pos.y + 150)
+//            let mid3Pos = CGPoint(x: mid2Pos.x - 100, y: mid2Pos.y - 50)
+            let positionArray = getMoveNodes(for: CGPoint(x: heart.position.x, y: heart.position.y))
+            
             let endPosition = CGPoint(x: people[0].position.x, y: people[0].position.y)
             
-            let moveTo1 = SKAction.move(to: CGPoint(x: mid1Pos.x, y: mid1Pos.y), duration: 1)
-            let moveTo2 = SKAction.move(to: CGPoint(x: mid2Pos.x, y: mid2Pos.y), duration: 1)
-            let moveTo3 = SKAction.move(to: CGPoint(x: mid3Pos.x, y: mid3Pos.y), duration: 1)
+            let moveTo1 = SKAction.move(to: positionArray[0], duration: 1)
+            let moveTo2 = SKAction.move(to: positionArray[1], duration: 1)
+            let moveTo3 = SKAction.move(to: positionArray[2], duration: 1)
             let moveTo4 = SKAction.move(to: CGPoint(x: endPosition.x, y: endPosition.y), duration: 1)
             
             let disappear = SKAction.fadeAlpha(to: 0, duration: 2)
@@ -437,11 +456,23 @@ func create() {
 
 func animate() {
     let pause = SKAction.wait(forDuration: 3)
-    scene.run(pause)
+    
+    for child in allChildren{
+        child.run(pause)
+    }
+    
     moveWind()
-    scene.run(pause)
+    
+    for child in allChildren{
+        child.run(pause)
+    }
+    
     wiggleHearts()
-    scene.run(pause)
+    
+    for child in allChildren{
+        child.run(pause)
+    }
+    
     moveHearts()
     
 }
