@@ -12,7 +12,7 @@ import SpriteKit
     Landscape created with
     Wind created by
     Hearts created by
-    Apple logo ...
+    Apple logo created by Skyler Svendsen in Affinity Designer
  
  All code written by author, Skyler Svendsen
  
@@ -130,7 +130,7 @@ func createPeople() {
     }
 }
 
-func illuminateShirts() {
+func createIlluminatedShirts() {
     for i in 0...5 {
         var person: SKSpriteNode
         var personPosition: CGPoint
@@ -193,171 +193,8 @@ func createWind() {
 
 }
 
-func wiggleHearts() {
-    for heart in hearts {
-        let startPosition = CGPoint(x: heart.position.x, y: heart.position.y)
-        let endPosition = CGPoint(x: heart.position.x + 3, y: heart.position.y)
-
-        let wiggleTo = SKAction.moveTo(x: endPosition.x, duration: 0.3)
-        let wiggleBack = SKAction.moveTo(x: startPosition.x, duration: 0.3)
-
-        let sequence = SKAction.sequence([wiggleTo, wiggleBack])
-        let repeatAction = SKAction.repeat(sequence, count: 5)
-        heart.run(repeatAction)
-    }
-}
-
-func moveHearts() {
-    for heart in hearts{
-        switch heart.name {
-        case "heart1"?:
-            
-            let mid1Pos = CGPoint(x: midpoint.x + 300, y: midpoint.y + 200)
-            let mid2Pos = CGPoint(x: mid1Pos.x - 100, y: mid1Pos.y + 150)
-            let mid3Pos = CGPoint(x: mid2Pos.x - 100, y: mid2Pos.y - 50)
-            let endPosition = CGPoint(x: people[0].position.x, y: people[0].position.y)
-            
-            let moveTo1 = SKAction.move(to: CGPoint(x: mid1Pos.x, y: mid1Pos.y), duration: 1)
-            let moveTo2 = SKAction.move(to: CGPoint(x: mid2Pos.x, y: mid2Pos.y), duration: 1)
-            let moveTo3 = SKAction.move(to: CGPoint(x: mid3Pos.x, y: mid3Pos.y), duration: 1)
-            let moveTo4 = SKAction.move(to: CGPoint(x: endPosition.x, y: endPosition.y), duration: 1)
-            
-            let disappear = SKAction.fadeAlpha(to: 0, duration: 2)
-            
-            let sequenceHeart = SKAction.sequence([moveTo1, moveTo2, moveTo3, moveTo4, disappear])
-            heart.run(sequenceHeart)
-            
-            let waitTime = SKAction.wait(forDuration: 4)
-            let appear = SKAction.fadeAlpha(to: 1, duration: 1)
-            
-            let sequenceGlow = SKAction.sequence([waitTime, appear])
-            peopleGlow[0].run(sequenceGlow)
-            
-        case "heart2"?:
-            
-            let mid1Pos = CGPoint(x: midpoint.x + 260, y: midpoint.y + 250)
-            let mid2Pos = CGPoint(x: mid1Pos.x - 80, y: mid1Pos.y + 100)
-            let mid3Pos = CGPoint(x: mid2Pos.x - 200, y: mid2Pos.y - 150)
-            let endPosition = CGPoint(x: people[1].position.x, y: people[1].position.y)
-            
-            let moveTo1 = SKAction.move(to: CGPoint(x: mid1Pos.x, y: mid1Pos.y), duration: 1)
-            let moveTo2 = SKAction.move(to: CGPoint(x: mid2Pos.x, y: mid2Pos.y), duration: 1)
-            let moveTo3 = SKAction.move(to: CGPoint(x: mid3Pos.x, y: mid3Pos.y), duration: 1)
-            let moveTo4 = SKAction.move(to: CGPoint(x: endPosition.x, y: endPosition.y), duration: 2)
-            
-            let disappear = SKAction.fadeAlpha(to: 0, duration: 2)
-            let sequence = SKAction.sequence([moveTo1, moveTo2, moveTo3, moveTo4, disappear])
-            heart.run(sequence)
-            
-            let waitTime = SKAction.wait(forDuration: 5)
-            let appear = SKAction.fadeAlpha(to: 1, duration: 1)
-            
-            let sequenceGlow = SKAction.sequence([waitTime, appear])
-            peopleGlow[1].run(sequenceGlow)
-            
-        case "heart3"?:
-            
-            let mid1Pos = CGPoint(x: midpoint.x + 200, y: midpoint.y + 150)
-            let mid2Pos = CGPoint(x: mid1Pos.x - 50, y: mid1Pos.y + 100)
-            let mid3Pos = CGPoint(x: mid2Pos.x - 180, y: mid2Pos.y - 170)
-            let endPosition = CGPoint(x: people[2].position.x, y: people[2].position.y)
-            
-            let moveTo1 = SKAction.move(to: CGPoint(x: mid1Pos.x, y: mid1Pos.y), duration: 1)
-            let moveTo2 = SKAction.move(to: CGPoint(x: mid2Pos.x, y: mid2Pos.y), duration: 1)
-            let moveTo3 = SKAction.move(to: CGPoint(x: mid3Pos.x, y: mid3Pos.y), duration: 1)
-            let moveTo4 = SKAction.move(to: CGPoint(x: endPosition.x, y: endPosition.y), duration: 3)
-            
-            let disappear = SKAction.fadeAlpha(to: 0, duration: 2)
-            let sequence = SKAction.sequence([moveTo1, moveTo2, moveTo3, moveTo4, disappear])
-            heart.run(sequence)
-            
-            let waitTime = SKAction.wait(forDuration: 6)
-            let appear = SKAction.fadeAlpha(to: 1, duration: 1)
-            
-            let sequenceGlow = SKAction.sequence([waitTime, appear])
-            peopleGlow[2].run(sequenceGlow)
-            
-        case "heart4"?:
-            
-            let mid1Pos = CGPoint(x: midpoint.x + 180, y: midpoint.y + 60)
-            let mid2Pos = CGPoint(x: mid1Pos.x - 50, y: mid1Pos.y + 100)
-            let mid3Pos = CGPoint(x: mid2Pos.x - 180, y: mid2Pos.y - 170)
-            let endPosition = CGPoint(x: people[3].position.x, y: people[3].position.y)
-            
-            let moveTo1 = SKAction.move(to: CGPoint(x: mid1Pos.x, y: mid1Pos.y), duration: 1)
-            let moveTo2 = SKAction.move(to: CGPoint(x: mid2Pos.x, y: mid2Pos.y), duration: 1)
-            let moveTo3 = SKAction.move(to: CGPoint(x: mid3Pos.x, y: mid3Pos.y), duration: 1)
-            let moveTo4 = SKAction.move(to: CGPoint(x: endPosition.x, y: endPosition.y), duration: 4)
-            
-            let disappear = SKAction.fadeAlpha(to: 0, duration: 2)
-            let sequence = SKAction.sequence([moveTo1, moveTo2, moveTo3, moveTo4, disappear])
-            heart.run(sequence)
-            
-            let waitTime = SKAction.wait(forDuration: 7)
-            let appear = SKAction.fadeAlpha(to: 1, duration: 1)
-            
-            let sequenceGlow = SKAction.sequence([waitTime, appear])
-            peopleGlow[3].run(sequenceGlow)
-            
-        case "heart5"?:
-            
-            let mid1Pos = CGPoint(x: midpoint.x + 150, y: midpoint.y + 160)
-            let mid2Pos = CGPoint(x: mid1Pos.x - 10, y: mid1Pos.y + 100)
-            let mid3Pos = CGPoint(x: mid2Pos.x - 20, y: mid2Pos.y - 70)
-            let endPosition = CGPoint(x: people[4].position.x, y: people[4].position.y)
-            
-            let moveTo1 = SKAction.move(to: CGPoint(x: mid1Pos.x, y: mid1Pos.y), duration: 1)
-            let moveTo2 = SKAction.move(to: CGPoint(x: mid2Pos.x, y: mid2Pos.y), duration: 1)
-            let moveTo3 = SKAction.move(to: CGPoint(x: mid3Pos.x, y: mid3Pos.y), duration: 1)
-            let moveTo4 = SKAction.move(to: CGPoint(x: endPosition.x, y: endPosition.y), duration: 5)
-            
-            let disappear = SKAction.fadeAlpha(to: 0, duration: 2)
-            let sequence = SKAction.sequence([moveTo1, moveTo2, moveTo3, moveTo4, disappear])
-            heart.run(sequence)
-            
-            let waitTime = SKAction.wait(forDuration: 8)
-            let appear = SKAction.fadeAlpha(to: 1, duration: 1)
-            
-            let sequenceGlow = SKAction.sequence([waitTime, appear])
-            peopleGlow[4].run(sequenceGlow)
-            
-        case "heart6"?:
-            
-            let mid1Pos = CGPoint(x: midpoint.x + 180, y: midpoint.y + 180)
-            let mid2Pos = CGPoint(x: mid1Pos.x - 10, y: mid1Pos.y + 100)
-            let mid3Pos = CGPoint(x: mid2Pos.x - 20, y: mid2Pos.y - 70)
-            let endPosition = CGPoint(x: people[5].position.x, y: people[5].position.y)
-            
-            let moveTo1 = SKAction.move(to: CGPoint(x: mid1Pos.x, y: mid1Pos.y), duration: 1)
-            let moveTo2 = SKAction.move(to: CGPoint(x: mid2Pos.x, y: mid2Pos.y), duration: 1)
-            let moveTo3 = SKAction.move(to: CGPoint(x: mid3Pos.x, y: mid3Pos.y), duration: 1)
-            let moveTo4 = SKAction.move(to: CGPoint(x: endPosition.x, y: endPosition.y), duration: 6)
-            
-            let disappear = SKAction.fadeAlpha(to: 0, duration: 2)
-            let sequence = SKAction.sequence([moveTo1, moveTo2, moveTo3, moveTo4, disappear])
-            heart.run(sequence)
-            
-            let waitTime = SKAction.wait(forDuration: 9)
-            let appear = SKAction.fadeAlpha(to: 1, duration: 1)
-            
-            let sequenceGlow = SKAction.sequence([waitTime, appear])
-            peopleGlow[5].run(sequenceGlow)
-            
-        default:
-            break
-        }
-    }
-}
-
-
-
 func createLogo() {
-//    let fadeOut = SKAction.fadeOut(withDuration: 4)
-//
-//    for child in allChildren {
-//        child.run(fadeOut)
-//    }
-//
+    
     let logoGreenTexture = SKTexture(imageNamed: "Apple-Green")
     let logoGreen = SKSpriteNode(texture: logoGreenTexture)
     
@@ -414,46 +251,250 @@ func createLogo() {
     
 }
 
+//animation methods
 func moveWind() {
-    //actions
     let endPosition = frame.width + 150
     let moveBy = SKAction.moveBy(x: endPosition, y: 0, duration: 4.0)
     let wait = SKAction.wait(forDuration: 3)
     let warp = SKAction.moveTo(x: CGFloat(-100), duration: 0)
     
-    let sequence = SKAction.sequence([moveBy, wait, warp])
-    let repeatAction = SKAction.repeat(sequence, count: 3)
-    wind.run(repeatAction)
+    let sequence = SKAction.sequence([moveBy, wait, warp, moveBy])
+    wind.run(sequence)
 }
 
+func wiggleHearts() {
+    for heart in hearts {
+        let startPosition = CGPoint(x: heart.position.x, y: heart.position.y)
+        let endPosition = CGPoint(x: heart.position.x + 3, y: heart.position.y)
+
+        let wiggleTo = SKAction.moveTo(x: endPosition.x, duration: 0.3)
+        let wiggleBack = SKAction.moveTo(x: startPosition.x, duration: 0.3)
+
+        let sequence = SKAction.sequence([wiggleTo, wiggleBack])
+        let repeatAction = SKAction.repeat(sequence, count: 7)
+        heart.run(repeatAction)
+    }
+}
+
+//moveHearts helper method
+func getMoveNodes(for heart: SKSpriteNode) -> [SKAction] {
+    
+    var nodesArray = [CGPoint]()
+    
+    let node1 = CGPoint(x: heart.position.x + 340, y: heart.position.y + 130)
+    let node2 = CGPoint(x: node1.x - 100, y: node1.y + 150)
+    let node3 = CGPoint(x: node2.x - 100, y: node2.y - 50)
+    
+    nodesArray.append(node1)
+    nodesArray.append(node2)
+    nodesArray.append(node3)
+    
+    var returnSequence = [SKAction]()
+    
+    let moveTo1 = SKAction.move(to: nodesArray[0], duration: 1)
+    let moveTo2 = SKAction.move(to: nodesArray[1], duration: 1)
+    let moveTo3 = SKAction.move(to: nodesArray[2], duration: 1)
+    
+    returnSequence.append(moveTo1)
+    returnSequence.append(moveTo2)
+    returnSequence.append(moveTo3)
+    
+    switch heart.name {
+    case "heart1"?:
+        let endPosition = CGPoint(x: people[0].position.x, y: people[0].position.y)
+        
+        let moveTo4 = SKAction.move(to: CGPoint(x: endPosition.x, y: endPosition.y), duration: 1)
+        
+        returnSequence.append(moveTo4)
+    case "heart2"?:
+        let endPosition = CGPoint(x: people[1].position.x, y: people[1].position.y)
+        
+        let moveTo4 = SKAction.move(to: CGPoint(x: endPosition.x, y: endPosition.y), duration: 2)
+        
+        returnSequence.append(moveTo4)
+    case "heart3"?:
+        let endPosition = CGPoint(x: people[2].position.x, y: people[2].position.y)
+        
+        let moveTo4 = SKAction.move(to: CGPoint(x: endPosition.x, y: endPosition.y), duration: 3)
+        
+        returnSequence.append(moveTo4)
+    case "heart4"?:
+        let endPosition = CGPoint(x: people[3].position.x, y: people[3].position.y)
+        
+        let moveTo4 = SKAction.move(to: CGPoint(x: endPosition.x, y: endPosition.y), duration: 4)
+        
+        returnSequence.append(moveTo4)
+    case "heart5"?:
+        let endPosition = CGPoint(x: people[4].position.x, y: people[4].position.y)
+        
+        let moveTo4 = SKAction.move(to: CGPoint(x: endPosition.x, y: endPosition.y), duration: 5)
+        
+        returnSequence.append(moveTo4)
+    case "heart6"?:
+        let endPosition = CGPoint(x: people[5].position.x, y: people[5].position.y)
+        
+        let moveTo4 = SKAction.move(to: CGPoint(x: endPosition.x, y: endPosition.y), duration: 6)
+        
+        returnSequence.append(moveTo4)
+    default:
+        break
+    }
+    
+    return returnSequence
+}
+
+func moveHearts() {
+    
+    let disappear = SKAction.fadeAlpha(to: 0, duration: 2)
+    
+    for heart in hearts{
+        switch heart.name {
+        case "heart1"?:
+            
+            var moveToArray = [SKAction]()
+            moveToArray = getMoveNodes(for: heart)
+            let sequenceHeart = SKAction.sequence([moveToArray[0], moveToArray[1], moveToArray[2], moveToArray[3], disappear])
+            heart.run(sequenceHeart)
+            
+            let waitTime = SKAction.wait(forDuration: 4)
+            let appear = SKAction.fadeAlpha(to: 1, duration: 1)
+            let sequenceGlow = SKAction.sequence([waitTime, appear])
+            peopleGlow[0].run(sequenceGlow)
+            
+        case "heart2"?:
+            
+            var moveToArray = [SKAction]()
+            moveToArray = getMoveNodes(for: heart)
+            let sequenceHeart = SKAction.sequence([moveToArray[0], moveToArray[1], moveToArray[2], moveToArray[3], disappear])
+            heart.run(sequenceHeart)
+            
+            let waitTime = SKAction.wait(forDuration: 5)
+            let appear = SKAction.fadeAlpha(to: 1, duration: 1)
+            let sequenceGlow = SKAction.sequence([waitTime, appear])
+            peopleGlow[1].run(sequenceGlow)
+            
+        case "heart3"?:
+            
+            var moveToArray = [SKAction]()
+            moveToArray = getMoveNodes(for: heart)
+            let sequenceHeart = SKAction.sequence([moveToArray[0], moveToArray[1], moveToArray[2], moveToArray[3], disappear])
+            heart.run(sequenceHeart)
+            
+            let waitTime = SKAction.wait(forDuration: 6)
+            let appear = SKAction.fadeAlpha(to: 1, duration: 1)
+            let sequenceGlow = SKAction.sequence([waitTime, appear])
+            peopleGlow[2].run(sequenceGlow)
+            
+        case "heart4"?:
+            
+            var moveToArray = [SKAction]()
+            moveToArray = getMoveNodes(for: heart)
+            let sequenceHeart = SKAction.sequence([moveToArray[0], moveToArray[1], moveToArray[2], moveToArray[3], disappear])
+            heart.run(sequenceHeart)
+            
+            let waitTime = SKAction.wait(forDuration: 7)
+            let appear = SKAction.fadeAlpha(to: 1, duration: 1)
+            let sequenceGlow = SKAction.sequence([waitTime, appear])
+            peopleGlow[3].run(sequenceGlow)
+            
+        case "heart5"?:
+            
+            var moveToArray = [SKAction]()
+            moveToArray = getMoveNodes(for: heart)
+            let sequenceHeart = SKAction.sequence([moveToArray[0], moveToArray[1], moveToArray[2], moveToArray[3], disappear])
+            heart.run(sequenceHeart)
+            
+            let waitTime = SKAction.wait(forDuration: 8)
+            let appear = SKAction.fadeAlpha(to: 1, duration: 1)
+            let sequenceGlow = SKAction.sequence([waitTime, appear])
+            peopleGlow[4].run(sequenceGlow)
+            
+        case "heart6"?:
+            
+            var moveToArray = [SKAction]()
+            moveToArray = getMoveNodes(for: heart)
+            let sequenceHeart = SKAction.sequence([moveToArray[0], moveToArray[1], moveToArray[2], moveToArray[3], disappear])
+            heart.run(sequenceHeart)
+            
+            let waitTime = SKAction.wait(forDuration: 9)
+            let appear = SKAction.fadeAlpha(to: 1, duration: 1)
+            let sequenceGlow = SKAction.sequence([waitTime, appear])
+            peopleGlow[5].run(sequenceGlow)
+            
+        default:
+            break
+        }
+    }
+}
+
+func fadeIntoLogo() {
+    let fadeOut = SKAction.fadeOut(withDuration: 4)
+    
+    for child in allChildren {
+        child.run(fadeOut)
+    }
+
+}
+
+
+//combining methods
 func create() {
     createLandscape()
     createHearts()
     createPeople()
+    createIlluminatedShirts()
     createWind()
-    illuminateShirts()
     createLogo()
 }
 
 func animate() {
+    //spacer actions
+    let shortPause = SKAction.wait(forDuration: 1)
     let pause = SKAction.wait(forDuration: 3)
-    scene.run(pause)
-    moveWind()
-    scene.run(pause)
-    wiggleHearts()
-    scene.run(pause)
-    moveHearts()
+    let longPause = SKAction.wait(forDuration: 8)
+    let longerPause = SKAction.wait(forDuration: 12)
+    let fadeOut = SKAction.fadeOut(withDuration: 3)
+    let fadeIn = SKAction.fadeIn(withDuration: 3)
+
+    //function call actions
+    let wind = SKAction.run {
+        moveWind()
+    }
     
+    let wiggle = SKAction.run {
+        wiggleHearts()
+    }
+    
+    let move = SKAction.run {
+        moveHearts()
+    }
+    
+    let childrenFade = SKAction.run {
+        for child in allChildren {
+            child.run(fadeOut)
+        }
+    }
+    
+    let logoFade = SKAction.run {
+        for child in totalLogo {
+            child.run(fadeIn)
+        }
+    }
+    
+    //sequence
+    let sequence = SKAction.sequence([pause, wind, shortPause, wiggle, longPause, move, longerPause, childrenFade, pause, logoFade])
+    
+    //putting it all together
+    scene.run(sequence)
 }
+
 //create scene and actions
 
 create()
 animate()
 
-
 view.presentScene(scene)
 PlaygroundPage.current.liveView = view
-
 
 
 
