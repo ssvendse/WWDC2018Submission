@@ -130,7 +130,7 @@ func createPeople() {
     }
 }
 
-func illuminateShirts() {
+func createIlluminatedShirts() {
     for i in 0...5 {
         var person: SKSpriteNode
         var personPosition: CGPoint
@@ -202,14 +202,13 @@ func wiggleHearts() {
         let wiggleBack = SKAction.moveTo(x: startPosition.x, duration: 0.3)
 
         let sequence = SKAction.sequence([wiggleTo, wiggleBack])
-        let repeatAction = SKAction.repeat(sequence, count: 5)
+        let repeatAction = SKAction.repeat(sequence, count: 7)
         heart.run(repeatAction)
     }
 }
 
+//moveHearts helper method
 func getMoveNodes(for heart: CGPoint) -> [CGPoint]{
-    let xStart = heart.x
-    let yStart = heart.y
     
     var returnArray = [CGPoint]()
     
@@ -229,9 +228,6 @@ func moveHearts() {
         switch heart.name {
         case "heart1"?:
             
-//            let mid1Pos = CGPoint(x: midpoint.x + 300, y: midpoint.y + 200)
-//            let mid2Pos = CGPoint(x: mid1Pos.x - 100, y: mid1Pos.y + 150)
-//            let mid3Pos = CGPoint(x: mid2Pos.x - 100, y: mid2Pos.y - 50)
             let positionArray = getMoveNodes(for: CGPoint(x: heart.position.x, y: heart.position.y))
             
             let endPosition = CGPoint(x: people[0].position.x, y: people[0].position.y)
@@ -371,12 +367,7 @@ func moveHearts() {
 
 
 func createLogo() {
-//    let fadeOut = SKAction.fadeOut(withDuration: 4)
-//
-//    for child in allChildren {
-//        child.run(fadeOut)
-//    }
-//
+    
     let logoGreenTexture = SKTexture(imageNamed: "Apple-Green")
     let logoGreen = SKSpriteNode(texture: logoGreenTexture)
     
@@ -433,6 +424,15 @@ func createLogo() {
     
 }
 
+func fadeIntoLogo() {
+    let fadeOut = SKAction.fadeOut(withDuration: 4)
+    
+    for child in allChildren {
+        child.run(fadeOut)
+    }
+
+}
+
 func moveWind() {
     //actions
     let endPosition = frame.width + 150
@@ -440,51 +440,68 @@ func moveWind() {
     let wait = SKAction.wait(forDuration: 3)
     let warp = SKAction.moveTo(x: CGFloat(-100), duration: 0)
     
-    let sequence = SKAction.sequence([moveBy, wait, warp])
-    let repeatAction = SKAction.repeat(sequence, count: 3)
-    wind.run(repeatAction)
+    let sequence = SKAction.sequence([moveBy, wait, warp, moveBy])
+//    let repeatAction = SKAction.repeat(sequence, count: 2)
+    wind.run(sequence)
 }
 
 func create() {
     createLandscape()
     createHearts()
     createPeople()
+    createIlluminatedShirts()
     createWind()
-    illuminateShirts()
     createLogo()
 }
 
 func animate() {
+    //spacer actions
+    let shortPause = SKAction.wait(forDuration: 1)
     let pause = SKAction.wait(forDuration: 3)
-    
-    for child in allChildren{
-        child.run(pause)
+    let longPause = SKAction.wait(forDuration: 8)
+    let longerPause = SKAction.wait(forDuration: 12)
+    let fadeOut = SKAction.fadeOut(withDuration: 3)
+    let fadeIn = SKAction.fadeIn(withDuration: 3)
+
+    //function call actions
+    let wind = SKAction.run {
+        moveWind()
     }
     
-    moveWind()
-    
-    for child in allChildren{
-        child.run(pause)
+    let wiggle = SKAction.run {
+        wiggleHearts()
     }
     
-    wiggleHearts()
-    
-    for child in allChildren{
-        child.run(pause)
+    let move = SKAction.run {
+        moveHearts()
     }
     
-    moveHearts()
+    let childrenFade = SKAction.run {
+        for child in allChildren {
+            child.run(fadeOut)
+        }
+    }
     
+    let logoFade = SKAction.run {
+        for child in totalLogo {
+            child.run(fadeIn)
+        }
+    }
+    
+    //sequence
+    let sequence = SKAction.sequence([pause, wind, shortPause, wiggle, longPause, move, longerPause, childrenFade, pause, logoFade])
+    
+    //putting it all together
+    scene.run(sequence)
 }
+
 //create scene and actions
 
 create()
 animate()
 
-
 view.presentScene(scene)
 PlaygroundPage.current.liveView = view
-
 
 
 
