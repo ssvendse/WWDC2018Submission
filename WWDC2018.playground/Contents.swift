@@ -148,7 +148,7 @@ func createIlluminatedShirts() {
             let logoGreenTexture = SKTexture(imageNamed: "Apple-Green")
             let logoGreen = SKSpriteNode(texture: logoGreenTexture)
             
-            logoGreen.position = CGPoint(x: midpoint.x, y: midpoint.y + 230)
+            logoGreen.position = CGPoint(x: midpoint.x, y: midpoint.y + 240)
             logoGreen.alpha = 0
             
             scene.addChild(logoGreen)
@@ -162,7 +162,7 @@ func createIlluminatedShirts() {
             let logoYellowTexture = SKTexture(imageNamed: "Apple-Yellow")
             let logoYellow = SKSpriteNode(texture: logoYellowTexture)
             
-            logoYellow.position = CGPoint(x: midpoint.x - 15, y: midpoint.y + 140)
+            logoYellow.position = CGPoint(x: midpoint.x - 15, y: midpoint.y + 150)
             logoYellow.alpha = 0
             
             scene.addChild(logoYellow)
@@ -170,13 +170,13 @@ func createIlluminatedShirts() {
         case 2:
             person = SKSpriteNode(imageNamed: "Person3-glow")
             person.name = "Person3-glow"
-            personPosition = CGPoint(x: midpoint.x - 80, y: midpoint.y - 240)
+            personPosition = CGPoint(x: midpoint.x - 80, y: midpoint.y - 230)
             person.alpha = 0
             
             let logoOrangeTexture = SKTexture(imageNamed: "Apple-Orange")
             let logoOrange = SKSpriteNode(texture: logoOrangeTexture)
             
-            logoOrange.position = CGPoint(x: midpoint.x - 26, y: midpoint.y + 94)
+            logoOrange.position = CGPoint(x: midpoint.x - 26, y: midpoint.y + 104)
             logoOrange.alpha = 0
             
             scene.addChild(logoOrange)
@@ -184,13 +184,13 @@ func createIlluminatedShirts() {
         case 3:
             person = SKSpriteNode(imageNamed: "Person4-glow")
             person.name = "Person4-glow"
-            personPosition = CGPoint(x: midpoint.x + 60, y: midpoint.y - 250)
+            personPosition = CGPoint(x: midpoint.x + 60, y: midpoint.y - 240)
             person.alpha = 0
             
             let logoRedTexture = SKTexture(imageNamed: "Apple-Red")
             let logoRed = SKSpriteNode(texture: logoRedTexture)
             
-            logoRed.position = CGPoint(x: midpoint.x - 4, y: midpoint.y + 49)
+            logoRed.position = CGPoint(x: midpoint.x - 4, y: midpoint.y + 59)
             logoRed.alpha = 0
             
             scene.addChild(logoRed)
@@ -204,7 +204,7 @@ func createIlluminatedShirts() {
             let logoPurpleTexture = SKTexture(imageNamed: "Apple-Purple")
             let logoPurple = SKSpriteNode(texture: logoPurpleTexture)
             
-            logoPurple.position = CGPoint(x: midpoint.x, y: midpoint.y + 1)
+            logoPurple.position = CGPoint(x: midpoint.x, y: midpoint.y + 11)
             logoPurple.alpha = 0
             
             scene.addChild(logoPurple)
@@ -218,7 +218,7 @@ func createIlluminatedShirts() {
             let logoBlueTexture = SKTexture(imageNamed: "Apple-Blue")
             let logoBlue = SKSpriteNode(texture: logoBlueTexture)
             
-            logoBlue.position = CGPoint(x: midpoint.x, y: midpoint.y - 48)
+            logoBlue.position = CGPoint(x: midpoint.x, y: midpoint.y - 38)
             logoBlue.alpha = 0
             
             scene.addChild(logoBlue)
@@ -510,9 +510,10 @@ func fadeIntoLogo() {
 //combining methods
 func create() {
     createLandscape()
-    createHearts()
+    
     createPeople()
     createIlluminatedShirts()
+    createHearts()
     createWind()
     //createLogo()
 }
@@ -521,7 +522,7 @@ func animate() {
     //spacer actions
     let shortPause = SKAction.wait(forDuration: 1)
     let pause = SKAction.wait(forDuration: 3)
-    let longPause = SKAction.wait(forDuration: 9)
+    let longPause = SKAction.wait(forDuration: 8)
     let longerPause = SKAction.wait(forDuration: 12)
     let fadeOut = SKAction.fadeOut(withDuration: 3)
     let fadeIn = SKAction.fadeIn(withDuration: 3)
