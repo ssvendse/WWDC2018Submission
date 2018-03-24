@@ -24,7 +24,7 @@ import SpriteKit
  */
 
 //variables
-let frame = CGRect(x: 0, y: 0, width: 800, height: 750)
+let frame = CGRect(x: 0, y: 0, width: 600, height: 800)
 let midpoint = CGPoint(x: frame.size.width / 2.0, y: frame.size.height / 2.0)
 
 let view = SKView(frame: frame)
@@ -41,7 +41,7 @@ var totalLogo = [SKSpriteNode]()
 func createLandscape() {
     let landscape = SKSpriteNode(imageNamed: "Landscape")
     
-    landscape.setScale(0.6)
+    //landscape.setScale(0.6)
     landscape.position = CGPoint(x: midpoint.x, y: midpoint.y)
     allChildren.append(landscape)
     scene.addChild(landscape)
@@ -81,7 +81,7 @@ func createHearts() {
         }
         
         heart.position = heartPosition
-        heart.setScale(0.6)
+        //heart.setScale(0.6)
         hearts.append(heart)
         allChildren.append(heart)
         scene.addChild(heart)
@@ -126,7 +126,7 @@ func createPeople() {
         }
         
         person.position = personPosition
-        person.setScale(0.6)
+        //person.setScale(0.6)
         people.append(person)
         allChildren.append(person)
         scene.addChild(person)
@@ -142,13 +142,13 @@ func createIlluminatedShirts() {
         case 0:
             person = SKSpriteNode(imageNamed: "Person1-glow")
             person.name = "Person1-glow"
-            personPosition = CGPoint(x: midpoint.x - 210, y: midpoint.y)
+            personPosition = CGPoint(x: midpoint.x - 207, y: midpoint.y)
             person.alpha = 0
             
             let logoGreenTexture = SKTexture(imageNamed: "Apple-Green")
             let logoGreen = SKSpriteNode(texture: logoGreenTexture)
             
-            logoGreen.position = CGPoint(x: midpoint.x, y: midpoint.y + 230)
+            logoGreen.position = CGPoint(x: midpoint.x, y: midpoint.y + 240)
             logoGreen.alpha = 0
             
             scene.addChild(logoGreen)
@@ -162,7 +162,7 @@ func createIlluminatedShirts() {
             let logoYellowTexture = SKTexture(imageNamed: "Apple-Yellow")
             let logoYellow = SKSpriteNode(texture: logoYellowTexture)
             
-            logoYellow.position = CGPoint(x: midpoint.x - 15, y: midpoint.y + 140)
+            logoYellow.position = CGPoint(x: midpoint.x - 15, y: midpoint.y + 150)
             logoYellow.alpha = 0
             
             scene.addChild(logoYellow)
@@ -170,13 +170,13 @@ func createIlluminatedShirts() {
         case 2:
             person = SKSpriteNode(imageNamed: "Person3-glow")
             person.name = "Person3-glow"
-            personPosition = CGPoint(x: midpoint.x - 80, y: midpoint.y - 240)
+            personPosition = CGPoint(x: midpoint.x - 80, y: midpoint.y - 230)
             person.alpha = 0
             
             let logoOrangeTexture = SKTexture(imageNamed: "Apple-Orange")
             let logoOrange = SKSpriteNode(texture: logoOrangeTexture)
             
-            logoOrange.position = CGPoint(x: midpoint.x - 26, y: midpoint.y + 94)
+            logoOrange.position = CGPoint(x: midpoint.x - 26, y: midpoint.y + 104)
             logoOrange.alpha = 0
             
             scene.addChild(logoOrange)
@@ -184,13 +184,13 @@ func createIlluminatedShirts() {
         case 3:
             person = SKSpriteNode(imageNamed: "Person4-glow")
             person.name = "Person4-glow"
-            personPosition = CGPoint(x: midpoint.x + 60, y: midpoint.y - 250)
+            personPosition = CGPoint(x: midpoint.x + 60, y: midpoint.y - 240)
             person.alpha = 0
             
             let logoRedTexture = SKTexture(imageNamed: "Apple-Red")
             let logoRed = SKSpriteNode(texture: logoRedTexture)
             
-            logoRed.position = CGPoint(x: midpoint.x - 4, y: midpoint.y + 49)
+            logoRed.position = CGPoint(x: midpoint.x - 4, y: midpoint.y + 59)
             logoRed.alpha = 0
             
             scene.addChild(logoRed)
@@ -204,7 +204,7 @@ func createIlluminatedShirts() {
             let logoPurpleTexture = SKTexture(imageNamed: "Apple-Purple")
             let logoPurple = SKSpriteNode(texture: logoPurpleTexture)
             
-            logoPurple.position = CGPoint(x: midpoint.x, y: midpoint.y + 1)
+            logoPurple.position = CGPoint(x: midpoint.x, y: midpoint.y + 11)
             logoPurple.alpha = 0
             
             scene.addChild(logoPurple)
@@ -218,7 +218,7 @@ func createIlluminatedShirts() {
             let logoBlueTexture = SKTexture(imageNamed: "Apple-Blue")
             let logoBlue = SKSpriteNode(texture: logoBlueTexture)
             
-            logoBlue.position = CGPoint(x: midpoint.x, y: midpoint.y - 48)
+            logoBlue.position = CGPoint(x: midpoint.x, y: midpoint.y - 38)
             logoBlue.alpha = 0
             
             scene.addChild(logoBlue)
@@ -231,7 +231,7 @@ func createIlluminatedShirts() {
         }
         
         person.position = personPosition
-        person.setScale(0.6)
+        //person.setScale(0.6)
         peopleGlow.append(person)
         allChildren.append(person)
         scene.addChild(person)
@@ -243,8 +243,8 @@ func createWind() {
     let windTexture = SKTexture(imageNamed: "Wind")
     wind = SKSpriteNode(texture: windTexture)
     
-    wind.setScale(0.6)
-    wind.position = CGPoint(x: 0, y: midpoint.y + 150)
+    //wind.setScale(0.6)
+    wind.position = CGPoint(x: -80, y: midpoint.y + 150)
     allChildren.append(wind)
     scene.addChild(wind)
 }
@@ -309,10 +309,10 @@ func createWind() {
 
 //animation methods
 func moveWind() {
-    let endPosition = frame.width + 150
+    let endPosition = frame.width + 200
     let moveBy = SKAction.moveBy(x: endPosition, y: 0, duration: 4.0)
     let wait = SKAction.wait(forDuration: 3)
-    let warp = SKAction.moveTo(x: CGFloat(-100), duration: 0)
+    let warp = SKAction.moveTo(x: CGFloat(-80), duration: 0)
     
     let sequence = SKAction.sequence([moveBy, wait, warp, moveBy])
     wind.run(sequence)
@@ -365,7 +365,7 @@ func getMoveNodes(for heart: SKSpriteNode) -> [SKAction] {
     
     switch heart.name {
     case "heart1"?:
-        let endPosition = CGPoint(x: people[0].position.x, y: people[0].position.y)
+        let endPosition = CGPoint(x: people[0].position.x + 3, y: people[0].position.y)
         
         let moveTo6 = SKAction.move(to: CGPoint(x: endPosition.x, y: endPosition.y), duration: 1)
         
@@ -510,18 +510,18 @@ func fadeIntoLogo() {
 //combining methods
 func create() {
     createLandscape()
-    createHearts()
     createPeople()
     createIlluminatedShirts()
+    createHearts()
     createWind()
-    //createLogo()
+//    createLogo()
 }
 
 func animate() {
     //spacer actions
     let shortPause = SKAction.wait(forDuration: 1)
     let pause = SKAction.wait(forDuration: 3)
-    let longPause = SKAction.wait(forDuration: 9)
+    let longPause = SKAction.wait(forDuration: 8)
     let longerPause = SKAction.wait(forDuration: 12)
     let fadeOut = SKAction.fadeOut(withDuration: 3)
     let fadeIn = SKAction.fadeIn(withDuration: 3)
