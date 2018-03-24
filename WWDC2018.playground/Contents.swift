@@ -24,7 +24,7 @@ import SpriteKit
  */
 
 //variables
-let frame = CGRect(x: 0, y: 0, width: 800, height: 750)
+let frame = CGRect(x: 0, y: 0, width: 500, height: 500)
 let midpoint = CGPoint(x: frame.size.width / 2.0, y: frame.size.height / 2.0)
 
 let view = SKView(frame: frame)
@@ -41,7 +41,7 @@ var totalLogo = [SKSpriteNode]()
 func createLandscape() {
     let landscape = SKSpriteNode(imageNamed: "Landscape")
     
-    landscape.setScale(0.6)
+    //landscape.setScale(0.6)
     landscape.position = CGPoint(x: midpoint.x, y: midpoint.y)
     allChildren.append(landscape)
     scene.addChild(landscape)
@@ -81,7 +81,7 @@ func createHearts() {
         }
         
         heart.position = heartPosition
-        heart.setScale(0.6)
+        //heart.setScale(0.6)
         hearts.append(heart)
         allChildren.append(heart)
         scene.addChild(heart)
@@ -126,7 +126,7 @@ func createPeople() {
         }
         
         person.position = personPosition
-        person.setScale(0.6)
+        //person.setScale(0.6)
         people.append(person)
         allChildren.append(person)
         scene.addChild(person)
@@ -231,7 +231,7 @@ func createIlluminatedShirts() {
         }
         
         person.position = personPosition
-        person.setScale(0.6)
+        //person.setScale(0.6)
         peopleGlow.append(person)
         allChildren.append(person)
         scene.addChild(person)
@@ -243,7 +243,7 @@ func createWind() {
     let windTexture = SKTexture(imageNamed: "Wind")
     wind = SKSpriteNode(texture: windTexture)
     
-    wind.setScale(0.6)
+    //wind.setScale(0.6)
     wind.position = CGPoint(x: 0, y: midpoint.y + 150)
     allChildren.append(wind)
     scene.addChild(wind)
