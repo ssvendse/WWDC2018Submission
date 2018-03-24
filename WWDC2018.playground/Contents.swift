@@ -24,7 +24,7 @@ import SpriteKit
  */
 
 //variables
-let frame = CGRect(x: 0, y: 0, width: 500, height: 500)
+let frame = CGRect(x: 0, y: 0, width: 600, height: 800)
 let midpoint = CGPoint(x: frame.size.width / 2.0, y: frame.size.height / 2.0)
 
 let view = SKView(frame: frame)
@@ -142,7 +142,7 @@ func createIlluminatedShirts() {
         case 0:
             person = SKSpriteNode(imageNamed: "Person1-glow")
             person.name = "Person1-glow"
-            personPosition = CGPoint(x: midpoint.x - 210, y: midpoint.y)
+            personPosition = CGPoint(x: midpoint.x - 207, y: midpoint.y)
             person.alpha = 0
             
             let logoGreenTexture = SKTexture(imageNamed: "Apple-Green")
@@ -244,7 +244,7 @@ func createWind() {
     wind = SKSpriteNode(texture: windTexture)
     
     //wind.setScale(0.6)
-    wind.position = CGPoint(x: 0, y: midpoint.y + 150)
+    wind.position = CGPoint(x: -80, y: midpoint.y + 150)
     allChildren.append(wind)
     scene.addChild(wind)
 }
@@ -309,10 +309,10 @@ func createWind() {
 
 //animation methods
 func moveWind() {
-    let endPosition = frame.width + 150
+    let endPosition = frame.width + 200
     let moveBy = SKAction.moveBy(x: endPosition, y: 0, duration: 4.0)
     let wait = SKAction.wait(forDuration: 3)
-    let warp = SKAction.moveTo(x: CGFloat(-100), duration: 0)
+    let warp = SKAction.moveTo(x: CGFloat(-80), duration: 0)
     
     let sequence = SKAction.sequence([moveBy, wait, warp, moveBy])
     wind.run(sequence)
@@ -365,7 +365,7 @@ func getMoveNodes(for heart: SKSpriteNode) -> [SKAction] {
     
     switch heart.name {
     case "heart1"?:
-        let endPosition = CGPoint(x: people[0].position.x, y: people[0].position.y)
+        let endPosition = CGPoint(x: people[0].position.x + 3, y: people[0].position.y)
         
         let moveTo6 = SKAction.move(to: CGPoint(x: endPosition.x, y: endPosition.y), duration: 1)
         
@@ -510,12 +510,11 @@ func fadeIntoLogo() {
 //combining methods
 func create() {
     createLandscape()
-    
     createPeople()
     createIlluminatedShirts()
     createHearts()
     createWind()
-    //createLogo()
+//    createLogo()
 }
 
 func animate() {
