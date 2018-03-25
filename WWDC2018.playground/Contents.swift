@@ -162,7 +162,7 @@ func createIlluminatedShirts() {
             let logoYellowTexture = SKTexture(imageNamed: "Apple-Yellow")
             let logoYellow = SKSpriteNode(texture: logoYellowTexture)
             
-            logoYellow.position = CGPoint(x: midpoint.x - 15, y: midpoint.y + 150)
+            logoYellow.position = CGPoint(x: midpoint.x - 14, y: midpoint.y + 150)
             logoYellow.alpha = 0
             
             scene.addChild(logoYellow)
@@ -176,7 +176,7 @@ func createIlluminatedShirts() {
             let logoOrangeTexture = SKTexture(imageNamed: "Apple-Orange")
             let logoOrange = SKSpriteNode(texture: logoOrangeTexture)
             
-            logoOrange.position = CGPoint(x: midpoint.x - 26, y: midpoint.y + 104)
+            logoOrange.position = CGPoint(x: midpoint.x - 25, y: midpoint.y + 104)
             logoOrange.alpha = 0
             
             scene.addChild(logoOrange)
@@ -190,7 +190,7 @@ func createIlluminatedShirts() {
             let logoRedTexture = SKTexture(imageNamed: "Apple-Red")
             let logoRed = SKSpriteNode(texture: logoRedTexture)
             
-            logoRed.position = CGPoint(x: midpoint.x - 4, y: midpoint.y + 59)
+            logoRed.position = CGPoint(x: midpoint.x - 2, y: midpoint.y + 59)
             logoRed.alpha = 0
             
             scene.addChild(logoRed)
@@ -204,7 +204,7 @@ func createIlluminatedShirts() {
             let logoPurpleTexture = SKTexture(imageNamed: "Apple-Purple")
             let logoPurple = SKSpriteNode(texture: logoPurpleTexture)
             
-            logoPurple.position = CGPoint(x: midpoint.x, y: midpoint.y + 11)
+            logoPurple.position = CGPoint(x: midpoint.x + 3, y: midpoint.y + 11)
             logoPurple.alpha = 0
             
             scene.addChild(logoPurple)
@@ -218,7 +218,7 @@ func createIlluminatedShirts() {
             let logoBlueTexture = SKTexture(imageNamed: "Apple-Blue")
             let logoBlue = SKSpriteNode(texture: logoBlueTexture)
             
-            logoBlue.position = CGPoint(x: midpoint.x, y: midpoint.y - 38)
+            logoBlue.position = CGPoint(x: midpoint.x + 2, y: midpoint.y - 38)
             logoBlue.alpha = 0
             
             scene.addChild(logoBlue)
@@ -244,75 +244,17 @@ func createWind() {
     wind = SKSpriteNode(texture: windTexture)
     
     //wind.setScale(0.6)
-    wind.position = CGPoint(x: -80, y: midpoint.y + 150)
+    wind.position = CGPoint(x: -150, y: midpoint.y + 150)
     allChildren.append(wind)
     scene.addChild(wind)
 }
 
-//func createLogo() {
-//
-//    let logoGreenTexture = SKTexture(imageNamed: "Apple-Green")
-//    let logoGreen = SKSpriteNode(texture: logoGreenTexture)
-//
-//    logoGreen.position = CGPoint(x: midpoint.x, y: midpoint.y + 200)
-//    logoGreen.alpha = 0
-//
-//    scene.addChild(logoGreen)
-//    totalLogo.append(logoGreen)
-//
-//    let logoYellowTexture = SKTexture(imageNamed: "Apple-Yellow")
-//    let logoYellow = SKSpriteNode(texture: logoYellowTexture)
-//
-//    logoYellow.position = CGPoint(x: midpoint.x - 15, y: midpoint.y + 110)
-//    logoYellow.alpha = 0
-//
-//    scene.addChild(logoYellow)
-//    totalLogo.append(logoYellow)
-//
-//    let logoOrangeTexture = SKTexture(imageNamed: "Apple-Orange")
-//    let logoOrange = SKSpriteNode(texture: logoOrangeTexture)
-//
-//    logoOrange.position = CGPoint(x: midpoint.x - 26, y: midpoint.y + 64)
-//    logoOrange.alpha = 0
-//
-//    scene.addChild(logoOrange)
-//    totalLogo.append(logoOrange)
-//
-//    let logoRedTexture = SKTexture(imageNamed: "Apple-Red")
-//    let logoRed = SKSpriteNode(texture: logoRedTexture)
-//
-//    logoRed.position = CGPoint(x: midpoint.x - 4, y: midpoint.y + 19)
-//    logoRed.alpha = 0
-//
-//    scene.addChild(logoRed)
-//    totalLogo.append(logoRed)
-//
-//    let logoPurpleTexture = SKTexture(imageNamed: "Apple-Purple")
-//    let logoPurple = SKSpriteNode(texture: logoPurpleTexture)
-//
-//    logoPurple.position = CGPoint(x: midpoint.x, y: midpoint.y - 29)
-//    logoPurple.alpha = 0
-//
-//    scene.addChild(logoPurple)
-//    totalLogo.append(logoPurple)
-//
-//    let logoBlueTexture = SKTexture(imageNamed: "Apple-Blue")
-//    let logoBlue = SKSpriteNode(texture: logoBlueTexture)
-//
-//    logoBlue.position = CGPoint(x: midpoint.x, y: midpoint.y - 78)
-//    logoBlue.alpha = 0
-//
-//    scene.addChild(logoBlue)
-//    totalLogo.append(logoBlue)
-//
-//}
-
 //animation methods
 func moveWind() {
-    let endPosition = frame.width + 200
+    let endPosition = frame.width + 300
     let moveBy = SKAction.moveBy(x: endPosition, y: 0, duration: 4.0)
     let wait = SKAction.wait(forDuration: 3)
-    let warp = SKAction.moveTo(x: CGFloat(-80), duration: 0)
+    let warp = SKAction.moveTo(x: CGFloat(-150), duration: 0)
     
     let sequence = SKAction.sequence([moveBy, wait, warp, moveBy])
     wind.run(sequence)
