@@ -439,6 +439,29 @@ func moveHearts() {
     }
 }
 
+func new_moveHearts() {
+    for heart in hearts {
+        switch heart.name {
+        case "heart1"?:
+            let path = UIBezierPath()
+            
+            path.addCurve(to: people[0].position, controlPoint1: <#T##CGPoint#>, controlPoint2: <#T##CGPoint#>)
+        case "heart2"?:
+            break
+        case "heart3"?:
+            break
+        case "heart4"?:
+            break
+        case "heart5"?:
+            break
+        case "heart6"?:
+            break
+        default:
+            break
+        }
+    }
+}
+
 func fadeIntoLogo() {
     let fadeOut = SKAction.fadeOut(withDuration: 4)
     
@@ -453,9 +476,9 @@ func fadeIntoLogo() {
 func create() {
     createLandscape()
     createPeople()
-    createIlluminatedShirts()
+    //createIlluminatedShirts()
     createHearts()
-    createWind()
+    //createWind()
 //    createLogo()
 }
 
