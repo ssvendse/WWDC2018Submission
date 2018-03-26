@@ -242,11 +242,11 @@ func createWind() {
 }
 
 //animation methods
-func moveWind() {
+func moveWind(speed: CGFloat) {
     let path = UIBezierPath()
     path.move(to: CGPoint(x: 0, y: midpoint.y + 200))
     path.addQuadCurve(to: CGPoint(x: frame.maxX + 300, y: frame.maxY + 200), controlPoint: CGPoint(x: frame.maxX * 0.75, y: 200))
-    let pathAction = SKAction.follow(path.cgPath, asOffset: false, orientToPath: false, speed: 200)
+    let pathAction = SKAction.follow(path.cgPath, asOffset: false, orientToPath: false, speed: speed)
 
     wind.run(pathAction)
     wind.position = CGPoint(x: -150, y: midpoint.y + 150)
@@ -369,14 +369,18 @@ func animate() {
     let fadeOut = SKAction.fadeOut(withDuration: 3)
 
     let pause1 = SKAction.wait(forDuration: 2)
-    let pause2 = SKAction.wait(forDuration: 1)
+    let pause2 = SKAction.wait(forDuration: 2)
     let pause3 = SKAction.wait(forDuration: 7)
-    let pause4 = SKAction.wait(forDuration: 2)
+    let pause4 = SKAction.wait(forDuration: 1.5)
     let pause5 = SKAction.wait(forDuration: 12)
     
     //function call actions
-    let wind = SKAction.run {
-        moveWind()
+//    let wind1 = SKAction.run {
+//        moveWind(speed: 180)
+//    }
+//
+    let wind2 = SKAction.run {
+        moveWind(speed: 200)
     }
 
     let wiggle = SKAction.run {
@@ -394,7 +398,7 @@ func animate() {
     }
 
     //master sequence
-    let sequence = SKAction.sequence([pause1, wind, pause2, wiggle, pause3, wind, pause4, move, pause5, childrenFade])
+    let sequence = SKAction.sequence([pause1, wind2, pause2, wiggle, pause3, wind2, pause4, move, pause5, childrenFade])
 
     //putting it all together
     scene.run(sequence)
