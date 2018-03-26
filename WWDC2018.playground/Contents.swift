@@ -236,19 +236,21 @@ func createWind() {
     let windTexture = SKTexture(imageNamed: "Wind")
     wind = SKSpriteNode(texture: windTexture)
     wind.position = CGPoint(x: -150, y: midpoint.y + 150)
+    
     allChildren.append(wind)
     scene.addChild(wind)
 }
 
 //animation methods
 func moveWind() {
-    let endPosition = frame.width + 300
-    let moveBy = SKAction.moveBy(x: endPosition, y: 0, duration: 4.0)
-    let wait = SKAction.wait(forDuration: 3)
-    let warp = SKAction.moveTo(x: CGFloat(-150), duration: 0)
+    let path = UIBezierPath()
+    path.move(to: CGPoint(x: 0, y: midpoint.y + 200))
+    path.addQuadCurve(to: CGPoint(x: frame.maxX + 300, y: frame.maxY + 200), controlPoint: CGPoint(x: frame.maxX * 0.75, y: 200))
+    let pathAction = SKAction.follow(path.cgPath, asOffset: false, orientToPath: false, speed: 200)
+
+    wind.run(pathAction)
+    wind.position = CGPoint(x: -150, y: midpoint.y + 150)
     
-    let sequence = SKAction.sequence([moveBy, wait, warp, moveBy])
-    wind.run(sequence)
 }
 
 func wiggleHearts() {
@@ -275,10 +277,10 @@ func moveHearts() {
             path.move(to: CGPoint(x: 0, y: 0))
             path.addCurve(to: CGPoint(x: -(heart.position.x - people[0].position.x) + 3, y: -(heart.position.y - people[0].position.y)), controlPoint1: CGPoint(x: -100, y: 100), controlPoint2: CGPoint(x: -midpoint.x, y: midpoint.y))
             
-            let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 6)
+            let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 4)
             heart.run(pathAction)
             
-            let waitTime = SKAction.wait(forDuration: 6)
+            let waitTime = SKAction.wait(forDuration: 4)
             let sequenceGlow = SKAction.sequence([waitTime, appear])
             peopleGlow[0].run(sequenceGlow)
             totalLogo[0].run(sequenceGlow)
@@ -288,10 +290,10 @@ func moveHearts() {
             path.move(to: CGPoint(x: 0, y: 0))
             path.addCurve(to: CGPoint(x: -(heart.position.x - people[1].position.x) + 2, y: -(heart.position.y - people[1].position.y) + 2), controlPoint1: CGPoint(x: -100, y: 100), controlPoint2: CGPoint(x: -midpoint.x, y: midpoint.y))
             
-            let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 8)
+            let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 6)
             heart.run(pathAction)
             
-            let waitTime = SKAction.wait(forDuration: 8)
+            let waitTime = SKAction.wait(forDuration: 6)
             let sequenceGlow = SKAction.sequence([waitTime, appear])
             peopleGlow[1].run(sequenceGlow)
             totalLogo[1].run(sequenceGlow)
@@ -301,10 +303,10 @@ func moveHearts() {
             path.move(to: CGPoint(x: 0, y: 0))
             path.addCurve(to: CGPoint(x: -(heart.position.x - people[2].position.x), y: -(heart.position.y - people[2].position.y) + 2), controlPoint1: CGPoint(x: -100, y: 100), controlPoint2: CGPoint(x: -midpoint.x, y: midpoint.y))
             
-            let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 10)
+            let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 8)
             heart.run(pathAction)
             
-            let waitTime = SKAction.wait(forDuration: 10)
+            let waitTime = SKAction.wait(forDuration: 8)
             let sequenceGlow = SKAction.sequence([waitTime, appear])
             peopleGlow[2].run(sequenceGlow)
             totalLogo[2].run(sequenceGlow)
@@ -312,12 +314,12 @@ func moveHearts() {
         case "heart4"?:
             let path = UIBezierPath()
             path.move(to: CGPoint(x: 0, y: 0))
-            path.addCurve(to: CGPoint(x: -(heart.position.x - people[3].position.x) + 2, y: -(heart.position.y - people[3].position.y) + 2), controlPoint1: CGPoint(x: -100, y: 100), controlPoint2: CGPoint(x: -midpoint.x, y: midpoint.y))
+            path.addCurve(to: CGPoint(x: -(heart.position.x - people[3].position.x) + 2, y: -(heart.position.y - people[3].position.y) + 2), controlPoint1: CGPoint(x: -100, y: 100), controlPoint2: CGPoint(x: midpoint.x, y: midpoint.y))
             
-            let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 12)
+            let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 10)
             heart.run(pathAction)
             
-            let waitTime = SKAction.wait(forDuration: 12)
+            let waitTime = SKAction.wait(forDuration: 10)
             let sequenceGlow = SKAction.sequence([waitTime, appear])
             peopleGlow[3].run(sequenceGlow)
             totalLogo[3].run(sequenceGlow)
@@ -325,12 +327,12 @@ func moveHearts() {
         case "heart5"?:
             let path = UIBezierPath()
             path.move(to: CGPoint(x: 0, y: 0))
-            path.addCurve(to: CGPoint(x: -(heart.position.x - people[4].position.x) + 2, y: -(heart.position.y - people[4].position.y) + 2), controlPoint1: CGPoint(x: -100, y: 100), controlPoint2: CGPoint(x: -midpoint.x, y: midpoint.y))
+            path.addCurve(to: CGPoint(x: -(heart.position.x - people[4].position.x) + 2, y: -(heart.position.y - people[4].position.y) + 2), controlPoint1: CGPoint(x: -100, y: 100), controlPoint2: CGPoint(x: midpoint.x, y: midpoint.y))
             
-            let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 14)
+            let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 11)
             heart.run(pathAction)
             
-            let waitTime = SKAction.wait(forDuration: 14)
+            let waitTime = SKAction.wait(forDuration: 11)
             let sequenceGlow = SKAction.sequence([waitTime, appear])
             peopleGlow[4].run(sequenceGlow)
             totalLogo[4].run(sequenceGlow)
@@ -338,12 +340,12 @@ func moveHearts() {
         case "heart6"?:
             let path = UIBezierPath()
             path.move(to: CGPoint(x: 0, y: 0))
-            path.addCurve(to: CGPoint(x: -(heart.position.x - people[5].position.x) + 2, y: -(heart.position.y - people[5].position.y) + 2), controlPoint1: CGPoint(x: -100, y: 100), controlPoint2: CGPoint(x: -midpoint.x, y: midpoint.y))
+            path.addCurve(to: CGPoint(x: -(heart.position.x - people[5].position.x) + 2, y: -(heart.position.y - people[5].position.y) + 2), controlPoint1: CGPoint(x: -100, y: 100), controlPoint2: CGPoint(x: midpoint.x, y: midpoint.y))
             
-            let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 16)
+            let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 12)
             heart.run(pathAction)
             
-            let waitTime = SKAction.wait(forDuration: 16)
+            let waitTime = SKAction.wait(forDuration: 12)
             let sequenceGlow = SKAction.sequence([waitTime, appear])
             peopleGlow[5].run(sequenceGlow)
             totalLogo[5].run(sequenceGlow)
@@ -374,7 +376,7 @@ func create() {
 
 func animate() {
     //spacer actions
-    let shortPause = SKAction.wait(forDuration: 1)
+    let shortPause = SKAction.wait(forDuration: 2)
     let pause = SKAction.wait(forDuration: 3)
     let longPause = SKAction.wait(forDuration: 8)
     let longerPause = SKAction.wait(forDuration: 18)
@@ -406,23 +408,14 @@ func animate() {
         }
     }
 
-    //sequence
-    let sequence = SKAction.sequence([pause, wind, shortPause, wiggle, longPause, move, longerPause, childrenFade, pause, logoFade])
+    //master sequence
+    let sequence = SKAction.sequence([pause, wind, shortPause, wiggle, longPause, wind, shortPause, move, longerPause, childrenFade, pause, logoFade])
 
     //putting it all together
     scene.run(sequence)
 }
 
-//func animate() {
-//    let move = SKAction.run {
-//        moveHearts()
-//    }
-//
-//    scene.run(move)
-//}
-
 //create scene and actions
-
 create()
 animate()
 
