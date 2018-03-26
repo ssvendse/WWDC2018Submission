@@ -25,7 +25,7 @@ import GameplayKit
  
  */
 
-class gameScene: SKScene {
+class GameScene: SKScene {
 
     //variables
 //    let frame = CGRect(x: 0, y: 0, width: 600, height: 800)
@@ -51,6 +51,7 @@ class gameScene: SKScene {
         self.addChild(landscape)
     }
 
+    //might have to implement as a heart...
     func createHearts() {
         for i in 0...5 {
             let heartTexture = SKTexture(imageNamed: "Heart")
@@ -415,7 +416,7 @@ class gameScene: SKScene {
 //present scene and display to liveView
 
 let view = SKView(frame: CGRect(x: 0, y: 0, width: 600, height: 800))
-let scene = gameScene(size: view.frame.size)
+let scene = GameScene(size: view.frame.size)
 
 view.presentScene(scene)
 PlaygroundPage.current.liveView = view
