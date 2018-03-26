@@ -1,6 +1,7 @@
 import UIKit
 import PlaygroundSupport
 import SpriteKit
+import GameplayKit
 
 /*
  
@@ -39,6 +40,8 @@ var wind = SKSpriteNode()
 var totalLogo = [SKSpriteNode]()
 
 //functions
+
+//scene setup functions
 func createLandscape() {
     let landscape = SKSpriteNode(imageNamed: "Landscape")
     landscape.position = CGPoint(x: midpoint.x, y: midpoint.y)
@@ -47,7 +50,6 @@ func createLandscape() {
 }
 
 func createHearts() {
-
     for i in 0...5 {
         let heartTexture = SKTexture(imageNamed: "Heart")
         let heart = SKSpriteNode(texture: heartTexture)
@@ -84,7 +86,6 @@ func createHearts() {
 }
 
 func createPeople() {
-    
     for i in 0...5 {
         var person: SKSpriteNode
         var personPosition: CGPoint
@@ -127,7 +128,7 @@ func createPeople() {
     }
 }
 
-func createIlluminatedShirts() {
+func createIlluminatedShirtsAndLogo() {
     for i in 0...5 {
         var person: SKSpriteNode
         var personPosition: CGPoint
@@ -236,19 +237,20 @@ func createWind() {
     let windTexture = SKTexture(imageNamed: "Wind")
     wind = SKSpriteNode(texture: windTexture)
     wind.position = CGPoint(x: -150, y: midpoint.y + 150)
+    
     allChildren.append(wind)
     scene.addChild(wind)
 }
 
 //animation methods
-func moveWind() {
-    let endPosition = frame.width + 300
-    let moveBy = SKAction.moveBy(x: endPosition, y: 0, duration: 4.0)
-    let wait = SKAction.wait(forDuration: 3)
-    let warp = SKAction.moveTo(x: CGFloat(-150), duration: 0)
-    
-    let sequence = SKAction.sequence([moveBy, wait, warp, moveBy])
-    wind.run(sequence)
+func moveWind(speed: CGFloat) {
+    let path = UIBezierPath()
+    path.move(to: CGPoint(x: 0, y: midpoint.y + 200))
+    path.addQuadCurve(to: CGPoint(x: frame.maxX + 300, y: frame.maxY + 200), controlPoint: CGPoint(x: frame.maxX * 0.75, y: 200))
+    let pathAction = SKAction.follow(path.cgPath, asOffset: false, orientToPath: false, speed: speed)
+
+    wind.run(pathAction)
+    wind.position = CGPoint(x: -150, y: midpoint.y + 150)
 }
 
 func wiggleHearts() {
@@ -275,10 +277,10 @@ func moveHearts() {
             path.move(to: CGPoint(x: 0, y: 0))
             path.addCurve(to: CGPoint(x: -(heart.position.x - people[0].position.x) + 3, y: -(heart.position.y - people[0].position.y)), controlPoint1: CGPoint(x: -100, y: 100), controlPoint2: CGPoint(x: -midpoint.x, y: midpoint.y))
             
-            let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 6)
+            let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 4)
             heart.run(pathAction)
             
-            let waitTime = SKAction.wait(forDuration: 6)
+            let waitTime = SKAction.wait(forDuration: 4)
             let sequenceGlow = SKAction.sequence([waitTime, appear])
             peopleGlow[0].run(sequenceGlow)
             totalLogo[0].run(sequenceGlow)
@@ -288,10 +290,10 @@ func moveHearts() {
             path.move(to: CGPoint(x: 0, y: 0))
             path.addCurve(to: CGPoint(x: -(heart.position.x - people[1].position.x) + 2, y: -(heart.position.y - people[1].position.y) + 2), controlPoint1: CGPoint(x: -100, y: 100), controlPoint2: CGPoint(x: -midpoint.x, y: midpoint.y))
             
-            let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 8)
+            let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 5)
             heart.run(pathAction)
             
-            let waitTime = SKAction.wait(forDuration: 8)
+            let waitTime = SKAction.wait(forDuration: 5)
             let sequenceGlow = SKAction.sequence([waitTime, appear])
             peopleGlow[1].run(sequenceGlow)
             totalLogo[1].run(sequenceGlow)
@@ -301,10 +303,10 @@ func moveHearts() {
             path.move(to: CGPoint(x: 0, y: 0))
             path.addCurve(to: CGPoint(x: -(heart.position.x - people[2].position.x), y: -(heart.position.y - people[2].position.y) + 2), controlPoint1: CGPoint(x: -100, y: 100), controlPoint2: CGPoint(x: -midpoint.x, y: midpoint.y))
             
-            let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 10)
+            let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 6)
             heart.run(pathAction)
             
-            let waitTime = SKAction.wait(forDuration: 10)
+            let waitTime = SKAction.wait(forDuration: 6)
             let sequenceGlow = SKAction.sequence([waitTime, appear])
             peopleGlow[2].run(sequenceGlow)
             totalLogo[2].run(sequenceGlow)
@@ -312,12 +314,12 @@ func moveHearts() {
         case "heart4"?:
             let path = UIBezierPath()
             path.move(to: CGPoint(x: 0, y: 0))
-            path.addCurve(to: CGPoint(x: -(heart.position.x - people[3].position.x) + 2, y: -(heart.position.y - people[3].position.y) + 2), controlPoint1: CGPoint(x: -100, y: 100), controlPoint2: CGPoint(x: -midpoint.x, y: midpoint.y))
+            path.addCurve(to: CGPoint(x: -(heart.position.x - people[3].position.x) + 2, y: -(heart.position.y - people[3].position.y) + 2), controlPoint1: CGPoint(x: -100, y: 100), controlPoint2: CGPoint(x: midpoint.x, y: midpoint.y))
             
-            let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 12)
+            let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 7)
             heart.run(pathAction)
             
-            let waitTime = SKAction.wait(forDuration: 12)
+            let waitTime = SKAction.wait(forDuration: 7)
             let sequenceGlow = SKAction.sequence([waitTime, appear])
             peopleGlow[3].run(sequenceGlow)
             totalLogo[3].run(sequenceGlow)
@@ -325,12 +327,12 @@ func moveHearts() {
         case "heart5"?:
             let path = UIBezierPath()
             path.move(to: CGPoint(x: 0, y: 0))
-            path.addCurve(to: CGPoint(x: -(heart.position.x - people[4].position.x) + 2, y: -(heart.position.y - people[4].position.y) + 2), controlPoint1: CGPoint(x: -100, y: 100), controlPoint2: CGPoint(x: -midpoint.x, y: midpoint.y))
+            path.addCurve(to: CGPoint(x: -(heart.position.x - people[4].position.x) + 2, y: -(heart.position.y - people[4].position.y) + 2), controlPoint1: CGPoint(x: -100, y: 100), controlPoint2: CGPoint(x: midpoint.x, y: midpoint.y))
             
-            let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 14)
+            let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 8)
             heart.run(pathAction)
             
-            let waitTime = SKAction.wait(forDuration: 14)
+            let waitTime = SKAction.wait(forDuration: 8)
             let sequenceGlow = SKAction.sequence([waitTime, appear])
             peopleGlow[4].run(sequenceGlow)
             totalLogo[4].run(sequenceGlow)
@@ -338,12 +340,12 @@ func moveHearts() {
         case "heart6"?:
             let path = UIBezierPath()
             path.move(to: CGPoint(x: 0, y: 0))
-            path.addCurve(to: CGPoint(x: -(heart.position.x - people[5].position.x) + 2, y: -(heart.position.y - people[5].position.y) + 2), controlPoint1: CGPoint(x: -100, y: 100), controlPoint2: CGPoint(x: -midpoint.x, y: midpoint.y))
+            path.addCurve(to: CGPoint(x: -(heart.position.x - people[5].position.x) + 1, y: -(heart.position.y - people[5].position.y) + 2), controlPoint1: CGPoint(x: -100, y: 100), controlPoint2: CGPoint(x: midpoint.x, y: midpoint.y))
             
-            let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 16)
+            let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 9)
             heart.run(pathAction)
             
-            let waitTime = SKAction.wait(forDuration: 16)
+            let waitTime = SKAction.wait(forDuration: 9)
             let sequenceGlow = SKAction.sequence([waitTime, appear])
             peopleGlow[5].run(sequenceGlow)
             totalLogo[5].run(sequenceGlow)
@@ -354,36 +356,32 @@ func moveHearts() {
     }
 }
 
-func fadeIntoLogo() {
-    let fadeOut = SKAction.fadeOut(withDuration: 4)
-    
-    for child in allChildren {
-        child.run(fadeOut)
-    }
-
-}
-
-//combining methods
+//combining methods into creation and animate sections
 func create() {
     createLandscape()
     createPeople()
-    createIlluminatedShirts()
+    createIlluminatedShirtsAndLogo()
     createHearts()
     createWind()
 }
 
 func animate() {
     //spacer actions
-    let shortPause = SKAction.wait(forDuration: 1)
-    let pause = SKAction.wait(forDuration: 3)
-    let longPause = SKAction.wait(forDuration: 8)
-    let longerPause = SKAction.wait(forDuration: 18)
     let fadeOut = SKAction.fadeOut(withDuration: 3)
-    let fadeIn = SKAction.fadeIn(withDuration: 3)
 
+    let pause1 = SKAction.wait(forDuration: 2)
+    let pause2 = SKAction.wait(forDuration: 2)
+    let pause3 = SKAction.wait(forDuration: 7)
+    let pause4 = SKAction.wait(forDuration: 1.5)
+    let pause5 = SKAction.wait(forDuration: 12)
+    
     //function call actions
-    let wind = SKAction.run {
-        moveWind()
+//    let wind1 = SKAction.run {
+//        moveWind(speed: 180)
+//    }
+//
+    let wind2 = SKAction.run {
+        moveWind(speed: 200)
     }
 
     let wiggle = SKAction.run {
@@ -400,32 +398,18 @@ func animate() {
         }
     }
 
-    let logoFade = SKAction.run {
-        for child in totalLogo {
-            child.run(fadeIn)
-        }
-    }
-
-    //sequence
-    let sequence = SKAction.sequence([pause, wind, shortPause, wiggle, longPause, move, longerPause, childrenFade, pause, logoFade])
+    //master sequence
+    let sequence = SKAction.sequence([pause1, wind2, pause2, wiggle, pause3, wind2, pause4, move, pause5, childrenFade])
 
     //putting it all together
     scene.run(sequence)
 }
 
-//func animate() {
-//    let move = SKAction.run {
-//        moveHearts()
-//    }
-//
-//    scene.run(move)
-//}
-
-//create scene and actions
-
+//create scene and animations
 create()
 animate()
 
+//present scene and display to liveView
 view.presentScene(scene)
 PlaygroundPage.current.liveView = view
 
