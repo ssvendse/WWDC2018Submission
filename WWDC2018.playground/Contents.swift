@@ -35,7 +35,10 @@ class GameScene: SKScene {
     var people = [SKSpriteNode]()
     var peopleGlow = [SKSpriteNode]()
     var wind = SKSpriteNode()
+    var cursor = SKSpriteNode()
     var totalLogo = [SKSpriteNode]()
+    var animationCount: Int = 0
+    var isAnimating = false
 
     //functions
     override func sceneDidLoad() {
@@ -244,6 +247,16 @@ class GameScene: SKScene {
         allChildren.append(wind)
         self.addChild(wind)
     }
+    
+    func createCursor() {
+        let cursorTexture = SKTexture(imageNamed: "Cursor")
+        cursor = SKSpriteNode(texture: cursorTexture)
+        cursor.position = CGPoint(x: frame.maxX - 25, y: frame.maxY - 25)
+        cursor.alpha = 0
+        
+        allChildren.append(cursor)
+        self.addChild(cursor)
+    }
 
     //animation methods
     func moveWind(speed: CGFloat) {
@@ -270,10 +283,10 @@ class GameScene: SKScene {
         }
     }
 
-    func moveHearts() {
+    func moveHeart(_ heart: SKSpriteNode) {
         let appear = SKAction.fadeAlpha(to: 1, duration: 1)
         
-        for heart in hearts {
+//        for heart in hearts {
             switch heart.name {
             case "heart1"?:
                 let path = UIBezierPath()
@@ -293,10 +306,10 @@ class GameScene: SKScene {
                 path.move(to: CGPoint(x: 0, y: 0))
                 path.addCurve(to: CGPoint(x: -(heart.position.x - people[1].position.x) + 2, y: -(heart.position.y - people[1].position.y) + 2), controlPoint1: CGPoint(x: -100, y: 100), controlPoint2: CGPoint(x: -midpoint.x, y: midpoint.y))
                 
-                let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 5)
+                let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 4)
                 heart.run(pathAction)
                 
-                let waitTime = SKAction.wait(forDuration: 5)
+                let waitTime = SKAction.wait(forDuration: 4)
                 let sequenceGlow = SKAction.sequence([waitTime, appear])
                 peopleGlow[1].run(sequenceGlow)
                 totalLogo[1].run(sequenceGlow)
@@ -306,10 +319,10 @@ class GameScene: SKScene {
                 path.move(to: CGPoint(x: 0, y: 0))
                 path.addCurve(to: CGPoint(x: -(heart.position.x - people[2].position.x), y: -(heart.position.y - people[2].position.y) + 2), controlPoint1: CGPoint(x: -100, y: 100), controlPoint2: CGPoint(x: -midpoint.x, y: midpoint.y))
                 
-                let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 6)
+                let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 4)
                 heart.run(pathAction)
                 
-                let waitTime = SKAction.wait(forDuration: 6)
+                let waitTime = SKAction.wait(forDuration: 4)
                 let sequenceGlow = SKAction.sequence([waitTime, appear])
                 peopleGlow[2].run(sequenceGlow)
                 totalLogo[2].run(sequenceGlow)
@@ -319,10 +332,10 @@ class GameScene: SKScene {
                 path.move(to: CGPoint(x: 0, y: 0))
                 path.addCurve(to: CGPoint(x: -(heart.position.x - people[3].position.x) + 2, y: -(heart.position.y - people[3].position.y) + 2), controlPoint1: CGPoint(x: -100, y: 100), controlPoint2: CGPoint(x: midpoint.x, y: midpoint.y))
                 
-                let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 7)
+                let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 4)
                 heart.run(pathAction)
                 
-                let waitTime = SKAction.wait(forDuration: 7)
+                let waitTime = SKAction.wait(forDuration: 4)
                 let sequenceGlow = SKAction.sequence([waitTime, appear])
                 peopleGlow[3].run(sequenceGlow)
                 totalLogo[3].run(sequenceGlow)
@@ -332,10 +345,10 @@ class GameScene: SKScene {
                 path.move(to: CGPoint(x: 0, y: 0))
                 path.addCurve(to: CGPoint(x: -(heart.position.x - people[4].position.x) + 2, y: -(heart.position.y - people[4].position.y) + 2), controlPoint1: CGPoint(x: -100, y: 100), controlPoint2: CGPoint(x: midpoint.x, y: midpoint.y))
                 
-                let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 8)
+                let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 4)
                 heart.run(pathAction)
                 
-                let waitTime = SKAction.wait(forDuration: 8)
+                let waitTime = SKAction.wait(forDuration: 4)
                 let sequenceGlow = SKAction.sequence([waitTime, appear])
                 peopleGlow[4].run(sequenceGlow)
                 totalLogo[4].run(sequenceGlow)
@@ -345,10 +358,10 @@ class GameScene: SKScene {
                 path.move(to: CGPoint(x: 0, y: 0))
                 path.addCurve(to: CGPoint(x: -(heart.position.x - people[5].position.x) + 1, y: -(heart.position.y - people[5].position.y) + 2), controlPoint1: CGPoint(x: -100, y: 100), controlPoint2: CGPoint(x: midpoint.x, y: midpoint.y))
                 
-                let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 9)
+                let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 4)
                 heart.run(pathAction)
                 
-                let waitTime = SKAction.wait(forDuration: 9)
+                let waitTime = SKAction.wait(forDuration: 4)
                 let sequenceGlow = SKAction.sequence([waitTime, appear])
                 peopleGlow[5].run(sequenceGlow)
                 totalLogo[5].run(sequenceGlow)
@@ -356,7 +369,7 @@ class GameScene: SKScene {
             default:
                 break
             }
-        }
+//        }
     }
 
     //combining methods into creation and animate sections
@@ -366,24 +379,25 @@ class GameScene: SKScene {
         createIlluminatedShirtsAndLogo()
         createHearts()
         createWind()
+        createCursor()
+        
+        let cursorFadeIn = SKAction.fadeIn(withDuration: 1)
+        let cursorWait = SKAction.wait(forDuration: 1)
+        let cursorFadeOut = SKAction.fadeOut(withDuration: 1)
+        
+        let sequence = SKAction.sequence([cursorWait, cursorFadeIn, cursorWait, cursorFadeOut])
+        cursor.run(sequence)
     }
 
     func animate() {
+        
         //spacer actions
         let fadeOut = SKAction.fadeOut(withDuration: 3)
-
         let pause1 = SKAction.wait(forDuration: 2)
-        let pause2 = SKAction.wait(forDuration: 2)
-        let pause3 = SKAction.wait(forDuration: 7)
-        let pause4 = SKAction.wait(forDuration: 1.5)
-        let pause5 = SKAction.wait(forDuration: 12)
-        
-        //function call actions
-    //    let wind1 = SKAction.run {
-    //        moveWind(speed: 180)
-    //    }
-    //
-        let wind2 = SKAction.run {
+        let pause2 = SKAction.wait(forDuration: 1.5)
+        let pause3 = SKAction.wait(forDuration: 4)
+
+        let wind = SKAction.run {
             self.moveWind(speed: 200)
         }
 
@@ -391,25 +405,96 @@ class GameScene: SKScene {
             self.wiggleHearts()
         }
 
-        let move = SKAction.run {
-            self.moveHearts()
-        }
-
         let childrenFade = SKAction.run {
             for child in self.allChildren {
                 child.run(fadeOut)
             }
         }
-
-        //master sequence
-        let sequence = SKAction.sequence([pause1, wind2, pause2, wiggle, pause3, wind2, pause4, move, pause5, childrenFade])
+        
+        let animationSwitch = SKAction.run {
+            self.isAnimating = false
+        }
 
         //putting it all together
-        self.run(sequence)
+        switch animationCount {
+        case 0:
+            isAnimating = true
+            
+            let sequence = SKAction.sequence([wind, pause1, wiggle, pause3, animationSwitch])
+            self.run(sequence)
+
+            animationCount += 1
+        case 1:
+            isAnimating = true
+            
+            let move = SKAction.run {
+                self.moveHeart(self.hearts[0])
+            }
+            let sequence = SKAction.sequence([wind, pause2, move, pause3, animationSwitch])
+            self.run(sequence)
+
+            animationCount += 1
+        case 2:
+            isAnimating = true
+            
+            let move = SKAction.run {
+                self.moveHeart(self.hearts[1])
+            }
+            let sequence = SKAction.sequence([wind, pause2, move, pause3, animationSwitch])
+            self.run(sequence)
+
+            animationCount += 1
+        case 3:
+            isAnimating = true
+            
+            let move = SKAction.run {
+                self.moveHeart(self.hearts[2])
+            }
+            let sequence = SKAction.sequence([wind, pause2, move, pause3, animationSwitch])
+            self.run(sequence)
+
+            animationCount += 1
+        case 4:
+            isAnimating = true
+            
+            let move = SKAction.run {
+                self.moveHeart(self.hearts[3])
+            }
+            let sequence = SKAction.sequence([wind, pause2, move, pause3, animationSwitch])
+            self.run(sequence)
+
+            animationCount += 1
+        case 5:
+            isAnimating = true
+            
+            let move = SKAction.run {
+                self.moveHeart(self.hearts[4])
+            }
+            let sequence = SKAction.sequence([wind, pause2, move, pause3, animationSwitch])
+            self.run(sequence)
+
+            animationCount += 1
+        case 6:
+            isAnimating = true
+            
+            let move = SKAction.run {
+                self.moveHeart(self.hearts[5])
+            }
+            let sequence = SKAction.sequence([wind, pause2, move, pause3, childrenFade])
+            self.run(sequence)
+
+            animationCount += 1
+        default:
+            break
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        animate()
+        
+        if !isAnimating {
+            animate()
+        }
+        
     }
 }
 
