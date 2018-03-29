@@ -292,41 +292,26 @@ class GameScene: SKScene {
             case "heart1"?:
                 let path = UIBezierPath()
                 path.move(to: CGPoint(x: 0, y: 0))
-                path.addCurve(to: CGPoint(x: -(heart.position.x - people[0].position.x) + 3, y: -(heart.position.y - people[0].position.y) + 300), controlPoint1: CGPoint(x: -100, y: 100), controlPoint2: CGPoint(x: -midpoint.x, y: midpoint.y))
+                path.addCurve(to: CGPoint(x: -(heart.position.x - people[1].position.x) - 15, y: -(heart.position.y - people[1].position.y) + 400), controlPoint1: CGPoint(x: -100, y: 100), controlPoint2: CGPoint(x: -midpoint.x, y: midpoint.y))
                 
                 let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 4)
                 heart.run(pathAction)
-                
-//                let waitTime = SKAction.wait(forDuration: 4)
-//                let sequenceGlow = SKAction.sequence([waitTime, appear])
-//                peopleGlow[0].run(sequenceGlow)
-//                totalLogo[0].run(sequenceGlow)
                 
             case "heart2"?:
                 let path = UIBezierPath()
                 path.move(to: CGPoint(x: 0, y: 0))
-                path.addCurve(to: CGPoint(x: -(heart.position.x - people[1].position.x) + 2, y: -(heart.position.y - people[1].position.y) + 400), controlPoint1: CGPoint(x: -100, y: 100), controlPoint2: CGPoint(x: -midpoint.x, y: midpoint.y))
+                path.addCurve(to: CGPoint(x: -(heart.position.x - people[0].position.x) + 10, y: -(heart.position.y - people[0].position.y) + 300), controlPoint1: CGPoint(x: -100, y: 100), controlPoint2: CGPoint(x: -midpoint.x, y: midpoint.y))
                 
                 let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 4)
                 heart.run(pathAction)
-                
-//                let waitTime = SKAction.wait(forDuration: 4)
-//                let sequenceGlow = SKAction.sequence([waitTime, appear])
-//                peopleGlow[1].run(sequenceGlow)
-//                totalLogo[1].run(sequenceGlow)
                 
             case "heart3"?:
                 let path = UIBezierPath()
                 path.move(to: CGPoint(x: 0, y: 0))
-                path.addCurve(to: CGPoint(x: -(heart.position.x - people[2].position.x), y: -(heart.position.y - people[2].position.y) + 600), controlPoint1: CGPoint(x: -100, y: 100), controlPoint2: CGPoint(x: -midpoint.x, y: midpoint.y))
+                path.addCurve(to: CGPoint(x: -(heart.position.x - people[2].position.x), y: -(heart.position.y - people[2].position.y) + 589), controlPoint1: CGPoint(x: -100, y: 100), controlPoint2: CGPoint(x: -midpoint.x, y: midpoint.y))
                 
                 let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 4)
                 heart.run(pathAction)
-                
-//                let waitTime = SKAction.wait(forDuration: 4)
-//                let sequenceGlow = SKAction.sequence([waitTime, appear])
-//                peopleGlow[2].run(sequenceGlow)
-//                totalLogo[2].run(sequenceGlow)
                 
             case "heart4"?:
                 let path = UIBezierPath()
@@ -336,36 +321,21 @@ class GameScene: SKScene {
                 let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 4)
                 heart.run(pathAction)
                 
-//                let waitTime = SKAction.wait(forDuration: 4)
-//                let sequenceGlow = SKAction.sequence([waitTime, appear])
-//                peopleGlow[3].run(sequenceGlow)
-//                totalLogo[3].run(sequenceGlow)
-                
             case "heart5"?:
                 let path = UIBezierPath()
                 path.move(to: CGPoint(x: 0, y: 0))
-                path.addCurve(to: CGPoint(x: -(heart.position.x - people[4].position.x) + 2, y: -(heart.position.y - people[4].position.y) + 400), controlPoint1: CGPoint(x: -100, y: 100), controlPoint2: CGPoint(x: midpoint.x, y: midpoint.y))
+                path.addCurve(to: CGPoint(x: -(heart.position.x - people[5].position.x) - 10, y: -(heart.position.y - people[5].position.y) + 304), controlPoint1: CGPoint(x: -100, y: 100), controlPoint2: CGPoint(x: midpoint.x, y: midpoint.y))
                 
                 let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 4)
                 heart.run(pathAction)
-                
-//                let waitTime = SKAction.wait(forDuration: 4)
-//                let sequenceGlow = SKAction.sequence([waitTime, appear])
-//                peopleGlow[4].run(sequenceGlow)
-//                totalLogo[4].run(sequenceGlow)
                 
             case "heart6"?:
                 let path = UIBezierPath()
                 path.move(to: CGPoint(x: 0, y: 0))
-                path.addCurve(to: CGPoint(x: -(heart.position.x - people[5].position.x) + 1, y: -(heart.position.y - people[5].position.y) + 300), controlPoint1: CGPoint(x: -100, y: 100), controlPoint2: CGPoint(x: midpoint.x, y: midpoint.y))
+                path.addCurve(to: CGPoint(x: -(heart.position.x - people[4].position.x) + 25, y: -(heart.position.y - people[4].position.y) + 400), controlPoint1: CGPoint(x: -100, y: 100), controlPoint2: CGPoint(x: midpoint.x, y: midpoint.y))
                 
                 let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 4)
                 heart.run(pathAction)
-                
-//                let waitTime = SKAction.wait(forDuration: 4)
-//                let sequenceGlow = SKAction.sequence([waitTime, appear])
-//                peopleGlow[5].run(sequenceGlow)
-//                totalLogo[5].run(sequenceGlow)
                 
             default:
                 break
@@ -435,7 +405,7 @@ class GameScene: SKScene {
         }
 
         let appear = SKAction.fadeIn(withDuration: 1)
-        let waitTime = SKAction.wait(forDuration: 4)
+        let waitTime = SKAction.wait(forDuration: 2)
         let sequenceGlow = SKAction.sequence([waitTime, appear])
         
         
@@ -444,8 +414,8 @@ class GameScene: SKScene {
             isDropping = true
             let path = UIBezierPath()
             path.move(to: CGPoint(x: 0, y: 0))
-            path.addLine(to: CGPoint(x: 1, y: -300))
-            let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 4)
+            path.addLine(to: CGPoint(x: 7, y: -225))
+            let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 2)
             
             let sequence = SKAction.sequence([pathAction, isDroppingChange])
             heart.run(sequence)
@@ -459,8 +429,8 @@ class GameScene: SKScene {
             isDropping = true
             let path = UIBezierPath()
             path.move(to: CGPoint(x: 0, y: 0))
-            path.addLine(to: CGPoint(x: 1, y: -398))
-            let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 4)
+            path.addLine(to: CGPoint(x: 0, y: -464))
+            let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 2)
             
             let sequence = SKAction.sequence([pathAction, isDroppingChange])
             heart.run(sequence)
@@ -473,8 +443,8 @@ class GameScene: SKScene {
             isDropping = true
             let path = UIBezierPath()
             path.move(to: CGPoint(x: 0, y: 0))
-            path.addLine(to: CGPoint(x: 0, y: -596))
-            let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 4)
+            path.addLine(to: CGPoint(x: 2, y: -588))
+            let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 2)
             
             let sequence = SKAction.sequence([pathAction, isDroppingChange])
             heart.run(sequence)
@@ -488,8 +458,8 @@ class GameScene: SKScene {
             isDropping = true
             let path = UIBezierPath()
             path.move(to: CGPoint(x: 0, y: 0))
-            path.addLine(to: CGPoint(x: -3, y: -596))
-            let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 4)
+            path.addLine(to: CGPoint(x: -4, y: -596))
+            let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 2)
             
             let sequence = SKAction.sequence([pathAction, isDroppingChange])
             heart.run(sequence)
@@ -502,8 +472,8 @@ class GameScene: SKScene {
             isDropping = true
             let path = UIBezierPath()
             path.move(to: CGPoint(x: 0, y: 0))
-            path.addLine(to: CGPoint(x: -2, y: -398))
-            let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 4)
+            path.addLine(to: CGPoint(x: 0, y: -468))
+            let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 2)
             
             let sequence = SKAction.sequence([pathAction, isDroppingChange])
             heart.run(sequence)
@@ -516,8 +486,8 @@ class GameScene: SKScene {
             isDropping = true
             let path = UIBezierPath()
             path.move(to: CGPoint(x: 0, y: 0))
-            path.addLine(to: CGPoint(x: 0, y: -298))
-            let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 4)
+            path.addLine(to: CGPoint(x: -14, y: -228))
+            let pathAction = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, duration: 2)
             
             let sequence = SKAction.sequence([pathAction, isDroppingChange])
             heart.run(sequence)
