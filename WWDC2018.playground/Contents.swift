@@ -12,9 +12,9 @@ import GameplayKit
         Kenney Asset credit: www.kenney.nl
     Wheelchair created by Skyler Svendsen in Affinity Designer
     Landscape created with use of Kenney Asset packs, assembled by Skyler Svendsen in Affinity Designer.
-        Kenney Asset credit: www.kenney.nl
     Wind created by Skyler Svendsen in Affinity Designer
     Hearts created by Skyler Svendsen in Affinity Designer
+    Cursor provided in Kenney Asset packs.
     Apple logo® recreated by Skyler Svendsen in Affinity Designer -- Not to be used or distributed outside this project. Not intended to infringe on any copyright laws.
  
     Apple, iPad, iPhone, iPod, and iPod touch are trademarks of Apple Inc., registered in the U.S. and other countries. Swift and the Swift logo are trademarks of Apple Inc.
@@ -28,7 +28,6 @@ import GameplayKit
 class GameScene: SKScene {
 
     //variables
-//    let frame = CGRect(x: 0, y: 0, width: 600, height: 800)
     let midpoint = CGPoint(x: 300, y: 400)
     var allChildren = [SKSpriteNode]()
     var hearts = [SKSpriteNode]()
@@ -37,13 +36,66 @@ class GameScene: SKScene {
     var wind = SKSpriteNode()
     var cursor = SKSpriteNode()
     var totalLogo = [SKSpriteNode]()
-    var animationCount: Int = 0
+    var animationCount = 0
     var isAnimating = false
     var isDropping = false
-
+    var heartsDropped = 0
+    var isFadingOut = false
+    
+    //actions
+    let pause1_5second = SKAction.wait(forDuration: 1.5)
+    let pause2second = SKAction.wait(forDuration: 2)
+    let pause4second = SKAction.wait(forDuration: 4)
+    let pause7second = SKAction.wait(forDuration: 7)
+    
+    let cursorFadeIn = SKAction.fadeIn(withDuration: 1)
+    let cursorWait = SKAction.wait(forDuration: 1)
+    let cursorFadeOut = SKAction.fadeOut(withDuration: 1)
+    
+    let appear = SKAction.fadeIn(withDuration: 1)
+    let fadeOut = SKAction.fadeOut(withDuration: 4)
+    
+    
+    var windMovement = SKAction()
+    var wiggle = SKAction()
+    var move = SKAction()
+    var isDroppingChange = SKAction()
+    
+    
+    //sequences
+    var cursorSequence = SKAction()
+    var firstTouchSequence = SKAction()
+    var secondTouchSequence = SKAction()
+    var sequenceGlow = SKAction()
+    
+    
     //functions
     override func sceneDidLoad() {
         super.sceneDidLoad()
+        
+        cursorSequence = SKAction.sequence([cursorWait, cursorFadeIn, cursorWait, cursorFadeOut])
+        
+        windMovement = SKAction.run {
+            self.moveWind(speed: 200)
+        }
+        
+        wiggle = SKAction.run {
+            self.wiggleHearts()
+        }
+        
+        move = SKAction.run {
+            self.moveHearts()
+        }
+        
+        isDroppingChange = SKAction.run {
+            self.isDropping = false
+        }
+        
+        
+        firstTouchSequence = SKAction.sequence([windMovement, pause1_5second, wiggle])
+        secondTouchSequence = SKAction.sequence([windMovement, pause1_5second, move])
+        sequenceGlow = SKAction.sequence([pause2second, appear])
+        
         create()
     }
     
@@ -285,8 +337,6 @@ class GameScene: SKScene {
     }
 
     func moveHearts() {
-        let appear = SKAction.fadeAlpha(to: 1, duration: 1)
-        
         for heart in hearts {
             switch heart.name {
             case "heart1"?:
@@ -352,62 +402,26 @@ class GameScene: SKScene {
         createWind()
         createCursor()
         
-        let cursorFadeIn = SKAction.fadeIn(withDuration: 1)
-        let cursorWait = SKAction.wait(forDuration: 1)
-        let cursorFadeOut = SKAction.fadeOut(withDuration: 1)
-        
-        let sequence = SKAction.sequence([cursorWait, cursorFadeIn, cursorWait, cursorFadeOut])
-        cursor.run(sequence)
+        cursor.run(cursorSequence)
     }
 
     func animate() {
         isAnimating = true
-        
-        let fadeOut = SKAction.fadeOut(withDuration: 3)
-        
-        let pause1 = SKAction.wait(forDuration: 2)
-        let pause2 = SKAction.wait(forDuration: 2)
-        let pause3 = SKAction.wait(forDuration: 7)
-        let pause4 = SKAction.wait(forDuration: 1.5)
-
-        
-        let wind = SKAction.run {
-            self.moveWind(speed: 200)
+        switch animationCount {
+        case 0:
+            self.run(firstTouchSequence)
+            isAnimating = false
+            animationCount += 1
+        case 1:
+            self.run(secondTouchSequence)
+        default:
+            break
         }
-        
-        let wiggle = SKAction.run {
-            self.wiggleHearts()
-        }
-        
-        let move = SKAction.run {
-            self.moveHearts()
-        }
-        
-//        let childrenFade = SKAction.run {
-//            for child in self.allChildren {
-//                child.run(fadeOut)
-//            }
-//        }
-        
-        //master sequence
-        let sequence = SKAction.sequence([pause1, wind, pause2, wiggle, pause3, wind, pause4, move])
-        
-        //putting it all together
-        self.run(sequence)
     }
     
     func dropHeart(_ heart: SKSpriteNode){
-        
-        
-        
-        let isDroppingChange = SKAction.run {
-            self.isDropping = false
-        }
 
-        let appear = SKAction.fadeIn(withDuration: 1)
-        let waitTime = SKAction.wait(forDuration: 2)
-        let sequenceGlow = SKAction.sequence([waitTime, appear])
-        
+        heartsDropped += 1
         
         switch heart.name {
         case "heart1"?:
@@ -420,8 +434,6 @@ class GameScene: SKScene {
             let sequence = SKAction.sequence([pathAction, isDroppingChange])
             heart.run(sequence)
             
-//            let waitTime = SKAction.wait(forDuration: 4)
-//            let sequenceGlow = SKAction.sequence([waitTime, appear])
             peopleGlow[0].run(sequenceGlow)
             totalLogo[0].run(sequenceGlow)
             
@@ -435,8 +447,6 @@ class GameScene: SKScene {
             let sequence = SKAction.sequence([pathAction, isDroppingChange])
             heart.run(sequence)
             
-//            let waitTime = SKAction.wait(forDuration: 4)
-//            let sequenceGlow = SKAction.sequence([waitTime, appear])
             peopleGlow[1].run(sequenceGlow)
             totalLogo[1].run(sequenceGlow)
         case "heart3"?:
@@ -449,8 +459,6 @@ class GameScene: SKScene {
             let sequence = SKAction.sequence([pathAction, isDroppingChange])
             heart.run(sequence)
             
-//            let waitTime = SKAction.wait(forDuration: 4)
-//            let sequenceGlow = SKAction.sequence([waitTime, appear])
             peopleGlow[2].run(sequenceGlow)
             totalLogo[2].run(sequenceGlow)
             
@@ -464,8 +472,6 @@ class GameScene: SKScene {
             let sequence = SKAction.sequence([pathAction, isDroppingChange])
             heart.run(sequence)
             
-//            let waitTime = SKAction.wait(forDuration: 4)
-//            let sequenceGlow = SKAction.sequence([waitTime, appear])
             peopleGlow[3].run(sequenceGlow)
             totalLogo[3].run(sequenceGlow)
         case "heart5"?:
@@ -478,8 +484,6 @@ class GameScene: SKScene {
             let sequence = SKAction.sequence([pathAction, isDroppingChange])
             heart.run(sequence)
             
-//            let waitTime = SKAction.wait(forDuration: 4)
-//            let sequenceGlow = SKAction.sequence([waitTime, appear])
             peopleGlow[4].run(sequenceGlow)
             totalLogo[4].run(sequenceGlow)
         case "heart6"?:
@@ -504,8 +508,8 @@ class GameScene: SKScene {
         if !isAnimating {
             animate()
         }
-        
-        if !isDropping{
+        //if we aren't dropping a heart and we are done animating--animation not turned false after second animate() call
+        if !isDropping && isAnimating{
             checkTouches(touches)
         }
         
@@ -521,7 +525,20 @@ class GameScene: SKScene {
             if node is SKSpriteNode {
                 let sprite = node as! SKSpriteNode
                 
-                dropHeart(sprite)
+                if let name = sprite.name {
+                    if name.contains("heart") {
+                        dropHeart(sprite)
+                    }
+                }
+                
+                
+                if heartsDropped == 6 && !isFadingOut{
+                    isFadingOut = true
+                    self.run(pause4second)
+                    for child in allChildren {
+                        child.run(fadeOut)
+                    }
+                }
             }
         }
     }
