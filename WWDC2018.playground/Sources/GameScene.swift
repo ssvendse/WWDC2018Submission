@@ -4,6 +4,13 @@ import PlaygroundSupport
 import SpriteKit
 import GameplayKit
 
+enum GameState {
+    case start
+    case wiggleDone
+    case heartsInAir
+    case allHeartsDelivered
+}
+
 public class GameScene: SKScene {
     
     //variables
@@ -17,10 +24,10 @@ public class GameScene: SKScene {
     var totalLogo = [SKSpriteNode]()
     var animationCount = 0
     var isAnimating = false
-    var heartsAreReady = false
-    var isDropping = false
     var heartsDropped = 0
     var isFadingIn = false
+    
+    var gameState = GameState.start
     
     //actions
     let pause1_5second = SKAction.wait(forDuration: 1.5)
@@ -71,11 +78,7 @@ public class GameScene: SKScene {
         move = SKAction.run {
             self.moveHearts()
         }
-        
-        isDroppingChange = SKAction.run {
-            self.isDropping = false
-        }
-        
+
         isFadingInChange = SKAction.run {
             self.isFadingIn = false
         }
@@ -390,35 +393,31 @@ public class GameScene: SKScene {
         createHearts()
         createWind()
         createCursor()
-        
         cursor.run(cursorSequence1)
     }
     
-    func animate() {
+    func animateToWiggle() {
         isAnimating = true
-        switch animationCount {
-        case 0:
-            self.run(firstTouchSequence)
-            isAnimating = false
-            animationCount += 1
-            cursor.run(cursorSequence2)
-        case 1:
-            self.run(secondTouchSequence)
-            cursor.position = CGPoint(x: 100, y: 620)
-            cursor.run(cursorSequence3)
-            heartsAreReady = true
-        default:
-            break
-        }
+        
+        self.run(firstTouchSequence)
+        isAnimating = false
+        animationCount += 1
+        cursor.run(cursorSequence2)
+        
+    }
+    
+    func animateToFloat() {
+        self.run(secondTouchSequence)
+        cursor.position = CGPoint(x: 100, y: 620)
+        cursor.run(cursorSequence3)
+        
     }
     
     func dropHeart(_ heart: SKSpriteNode){
         heartsDropped += 1
         
-        
         switch heart.name {
         case "heart1"?:
-            isDropping = true
             isFadingIn = true
             let path = UIBezierPath()
             path.move(to: CGPoint(x: 0, y: 0))
@@ -439,7 +438,6 @@ public class GameScene: SKScene {
             }
             
         case "heart2"?:
-            isDropping = true
             isFadingIn = true
             let path = UIBezierPath()
             path.move(to: CGPoint(x: 0, y: 0))
@@ -460,7 +458,6 @@ public class GameScene: SKScene {
             }
             
         case "heart3"?:
-            isDropping = true
             isFadingIn = true
             let path = UIBezierPath()
             path.move(to: CGPoint(x: 0, y: 0))
@@ -481,7 +478,6 @@ public class GameScene: SKScene {
             }
             
         case "heart4"?:
-            isDropping = true
             isFadingIn = true
             let path = UIBezierPath()
             path.move(to: CGPoint(x: 0, y: 0))
@@ -502,7 +498,6 @@ public class GameScene: SKScene {
             }
             
         case "heart5"?:
-            isDropping = true
             isFadingIn = true
             let path = UIBezierPath()
             path.move(to: CGPoint(x: 0, y: 0))
@@ -523,7 +518,6 @@ public class GameScene: SKScene {
             }
             
         case "heart6"?:
-            isDropping = true
             isFadingIn = true
             let path = UIBezierPath()
             path.move(to: CGPoint(x: 0, y: 0))
@@ -543,16 +537,12 @@ public class GameScene: SKScene {
                 fadeToLogo()
             }
             
-            
         default:
             break
         }
-        
-        
     }
     
     func fadeToLogo() {
-        
         let sequence = SKAction.sequence([pause4second, fadeOut])
         for child in allChildren {
             child.run(sequence)
@@ -560,15 +550,18 @@ public class GameScene: SKScene {
     }
     
     public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        if !isAnimating {
-            animate()
-        }
-        //if we aren't dropping a heart and we are done getting the hearts to float
-        if !isDropping && heartsAreReady {
+        switch gameState {
+        case .start:
+            animateToWiggle()
+            gameState = GameState.wiggleDone
+        case .wiggleDone:
+            animateToFloat()
+            gameState = GameState.heartsInAir
+        case .heartsInAir:
             checkTouches(touches)
+        default:
+            break
         }
-        
     }
     
     func checkTouches(_ touches: Set<UITouch>) {
@@ -580,15 +573,13 @@ public class GameScene: SKScene {
         for node in nodesAtPoint {
             if node is SKSpriteNode {
                 let sprite = node as! SKSpriteNode
-                
+
                 if let name = sprite.name {
                     if name.contains("heart") {
                         dropHeart(sprite)
                         
                     }
                 }
-                
-                
             }
         }
     }
